@@ -1,0 +1,701 @@
+﻿基本的SQL命令
+    1.SQL命令的使用规则
+        1.每条SQL命令必须以';'结尾
+        2.SQL命令不区分字母大小写
+        3.使用'\c'终止当前命令的执行
+    2.更改默认字符集
+        1.方法
+            通过更改MySQL配置文件实现
+        2.步骤(ubantu)
+            1.获取root权限
+                sudo - i
+            2.先备份配置文件(可百度)
+                cd / etc / mysql / mysql.conf.d/
+                cp mysqld.cnf mysqld.cnf.bak
+            3.更改mysqld.cnf配置
+                subl mysqld.cnf  # 打开该文件
+                [mysqld]  # 在该栏下加入以下语句
+                character_set_server = utf8
+            4.重启mysql服务
+                sudo / etc / init.d / mysql restart
+    3.客户端把数据存储到数据库服务器上的过程
+        1.先连接到数据库服务器
+        2.选择库
+        3.创建或者修改表
+        4.断开与数据库的连接  exit| quit | \q
+    4.库的管理
+        1.库的基本操作
+            1.查看已有的库
+                show databases
+            2.创建一个库(未更改默认字符集则为Latin1)
+                create database 库名[character set utf8]
+            3.查看创建库的语句(字符集)
+                show create database 库名
+            4.查看当前所在库
+                select database()
+            5.切换库
+                use 库名
+            6.查看库中已有的表
+                show tables
+            7.删除库
+                drop database 库名
+        2.库的命名规则
+            1.数字、字母、 '_'， 但是不能是纯数字
+            2.库名区分字母大小写
+            3.库名具有唯一性
+            4.不能使用特殊字符和MySQL关键字
+    5.表的管理
+        1.表的基本操作
+            1.创建表(制定字符集)
+                create table 表名(
+                    字段名1 数据类型,
+                    字段名2 数据类型,
+                    ...)[character set utf8]
+            2.查看创建表的语句(字符集)
+                show create table 表名
+            3.查看表结构
+                desc 表名
+            4.删除表
+                drop table 表名
+    6.表记录的管理
+        1.在表中插入记录(insert)
+            1.insert into 表名 values(值1), (值2), (值3), ...
+            2.insert into 表名(字段名1, 字段名2, ...) values(), (), ...
+        2.查询表记录(select)
+            1.select * from 表名[where 条件]
+            2.select 字段名1, 字段名2, ... from 表名[where 条件]
+        3.删除表记录(delete)
+            1.delete from 表名 where 条件
+            2.注意:
+                delete语句后没有加where条件, 表中的所有记录会被全部删除
+        4.更新表记录(update)
+            1.update 表名 set 字段1 = 新的值1, 字段2 = 新的值2, ... where 条件
+    7.数据类型
+        1.数值类型
+            1.整数型(有符号 和 无符号unsigned)
+                1.int 大整型(占4个字节)
+                    0 ~ 2**32 - 1(0~42亿多)
+                2.tinyint 微小整型(占1个字节)
+                    1.有符号(默认):
+                        -128~127
+                    2.无符号(unsigned):
+                        0 ~ 2**8 - 1(0~255)
+                3.bigint 极大整型(占8个字节)
+            2.浮点型
+                1.float(4个字节, 最多显示7个有效位)
+                    1.用法
+                        字段名 float(m, n)
+                        m:
+                            总位数(一定要 < 7)
+                        n:
+                            小数位位数
+                        e.g.:
+                            float(5, 2) 取值范围为(-999.99~999.99)
+                2.decimal(最多显示28个有效位)
+                    1.用法
+                        字段名 decimal(m, n)
+                    2.存储空间(整数部分和小数部分分开存储)
+                        规则:
+                            将9的倍数包装成4个字节
+                            被9整除后的余数    占字节
+                                1或2             1
+                                3或4             2
+                                5或6             3
+                                7或8             4
+                            e.g.:
+                                decimal(19, 9)
+                                整数部分:
+                                    10 / 9 = 商1余1 >> > 4字节 + 1字节 = 5字节
+                                小数部分:
+                                    9 / 9 = 商1余0 >> > 4字节 + 0字节 = 4字节
+        2.字符类型
+            1.char(定长)
+                char(宽度值(指的是字符宽度))最大255
+            2.varchar(变长)
+                varchar(宽度值)最大65535
+            3.char和varchar的特点
+                1.char:
+                    浪费存储空间, 性能高
+                2.varchar:
+                    节省存储空间, 性能低
+            4.text / longtext(一次可以存4G的文本)
+
+            数值类型的宽度和字符类型的宽度的区别
+                1.数值类型的宽度为显示宽度, 只用于select查询显示, 和占用存储空间大小无关, 用zerofill来显示效果
+                2.字符类型的宽度超过则无法存储(会报错)
+
+        3.枚举类型
+            1.定义:
+                字段值只能在列举的范围内选择
+            2.字段名 enum(值1, 值2, ...)   单选
+                字段名 set(值1, 值2, ...)    多选
+        4.日期时间类型
+            1.data:
+                日期 'YYYY-MM-DD'
+            2.time:
+                时间 'HH:MM:SS'
+            3.datatime:
+                日期时间 'YYYY-MM-DD HH:MM:SS'
+                (不给值则默认返回空值)
+            4.timestamp:
+                日期时间 'YYYY-MM-DD HH:MM:SS'
+                (不给值则默认返回系统当前时间)
+            5.日期时间函数
+                1.now()返回服务器当前时间(年月日时分秒)
+                2.curdata()返回当前日期
+                3.curtime()返回当前时间
+            6.日期时间运算
+                1.语法格式
+                    select ... from 表名 where 字段名 运算符(时间 - interval 时间间隔单位)
+                    e.g.:
+                        查询一天以内的记录
+                        select * from t1 where meeting > (now() - interval 1 day)
+                        查询一年以前的记录
+                        select * from t1 where meeting < (now() - interval 1 year)
+                        查询一天以前, 三天以内的记录
+                        select * from t1 where meeting < (now() - interval 1 day) and meeting > (now() - interval 3 day)
+                    时间间隔单位:
+                        day | hour | minute | year | month
+
+    8.表字段的操作(alter table 表名)
+        1.语法:
+            alter table 表名 执行动作
+        2.添加字段(add)
+            alter table 表名 add 字段名 数据类型
+            (默认添加到末尾)
+            alter table 表名 add 字段名 数据类型 first
+            (添加到首行)
+            alter table 表名 add 字段名 数据类型 after 字段名
+            (添加至字段名后)
+        3.删除字段(drop)
+            alter table 表名 drop 字段名
+        4.修改字段数据类型(modify)(一般不能去修改)
+            alter table 表名 modify 字段名 新数据类型
+        5.修改字段名(change)
+            alter table 表名 change 原字段名 新字段名 原数据类型(最好是原数据类型, 不影响数据结构)
+	6.设置字段默认值
+	    create table 表名 (字段名 字段类型 default 默认值);
+	7.修改字段默认值
+	    alter table 表名 alter column 字段名 drop default; (若本身存在默认值，则先删除)
+	    alter table 表名 alter column 字段名 set default 默认值;(若本身不存在则可以直接设定)
+
+    9.运算符操作(查询, 修改, 删除)
+        1.数值比较 & 字符比较 & 逻辑比较
+            数值:
+                = != > >= < <=
+            字符:
+                = !=
+            逻辑:
+                and or
+        2.范围内比较
+            between 值1 and 值2(值最好是数字)
+            in(值1, 值2, ...)(值可以是数字也可以是字符)
+            not in(值1, 值2, ...)
+        3.匹配空、非空
+            1.空： is null
+            2.非空:
+                is not null
+            3.注意:
+                null:
+                    空值, 必须用 is / is not 去匹配
+                '':
+                    空字符串, 只能用 = / != 去匹配
+        4.模糊比较
+            1.where 字段名 like 表达式
+            2.表达式
+                1.'_':
+                    匹配单个字符
+                2.'%':
+                    匹配0到多个字符
+            e.g.:
+            1.名字中至少有两个字符的记录
+            select * from xxx where name like '_%_'
+            2.匹配名字为非空的记录
+            select * from xxx where name like '%'
+            3.名字中只有3个字符的记录
+            select * from xxx where name like '___'
+            4.名字'赵'字开头的记录
+            select * from xxx where name like '赵%'
+    10.SQL查询
+        1.总结
+            3.select ...聚合函数 from 表名
+            1.where ...
+            2.group by ...
+            4.having ...
+            5.order by ...
+            6.limit ...
+            (序号为执行顺序)
+        2.order by
+            1.给查询的结果进行排序
+            2.order by 字段名 排序方式
+            3.排序方式
+                1.升序:
+                    ASC(默认)
+                2.降序:
+                    DESC
+        3.limit(永远放在SQL语句的最后)
+            1.作用:
+                限制显示查询记录的个数
+            2.用法
+                1.limit n(显示n条记录)
+                2.limit m, n
+                    m:
+                        表示从 m + 1 条记录开始显示
+                    n:
+                        表示显示n条
+            3.分页
+                每页显示5(n)条记录, 显示第4(m)页:
+                第一页:
+                    limit 0, 5
+                第二页:
+                    limit 5, 5
+                第三页:
+                    limit 10, 5
+                第四页:
+                    limit 15, 5
+
+                分页公式:
+                    limit(m - 1) * n, n
+        4.聚合函数
+            分类
+                avg(字段名):
+                    平均值
+                max(字段名):
+                    最大值
+                min(字段名):
+                    最小值
+                sum(字段名):
+                    求和
+                count(字段名):
+                    统计该字段记录的个数
+                    PS:
+                        空值null不会被统计
+        5.group by
+            1.作用:
+                给查询的结果进行分组
+            2.先分组 - 再聚合 - 去重
+            3.注意:
+                1.group by 之后的字段名必须要为select之后的字段名
+                2.如果select后的字段名和group by 之后的字段名不一致,
+                    则必须对该字段进行聚合处理(聚合函数)
+        6.having
+            1.作用:
+                查询结果进一步筛选
+            2.注意:
+                1.having语句一般情况下, 跟group by语句联合使用, 过滤由group by语句返回的记录集
+                2.where只能操作表中实际存在的字段, having操作由聚合函数生成的显示列
+        7.distinct(去重)
+            1.作用:
+                不显示字段的重复值
+                select count(distinct 字段名1, 字段名2, ...) from 表名
+            2.注意:
+                1.处理distinct和from之间的所有字段, 所有字段值必须全部相同才可以去重
+    11.约束
+        1.作用:
+            保证数据完整性、一致性、有限性的规则
+        2.约束分类
+            1.默认约束(default)
+                在插入记录时, 如果不给该字段赋值, 则使用默认值
+                字段名 数据类型 default 默认值,
+            2.非空约束(not null)
+                不允许该字段值有null记录, 必须给该字段赋值
+                字段名 数据类型 not null default 值,
+                eg.:
+                    sex enum('F', 'M', 'X') not null default X,
+    12.索引
+        1.BTREE
+        2.索引的优缺点
+            优点:
+                加快数据的检索速度
+            缺点:
+                1.当对表中的数据进行增加、修改、删除时，索引需要动态维护，降低了数据的维护速度
+                2.索引需要占用物理内存空间
+        3.索引实例
+            1.开启运行时间检测
+                set profiling = 1
+                备注:
+                    show variables like 'profiling'
+                    查询profiling的状态
+            2.执行查询语句(select后面尽量不要用"*")
+                select name from t1 where name = 'lucy99999'
+            3.查看执行时间
+                show profiles
+            4.给name字段创建索引
+                create index name on t1(name)
+                创建索引名在 表名(字段名)
+            5.执行查询语句
+                select name from t1 where name = 'lucy99999'
+            6.查看执行时间
+                show profiles
+        4.索引类型
+            1.普通索引(index)
+                1.使用规则
+                    1.可设置多个字段
+                    2.约束:
+                        无
+                    3.KEY标志:
+                        MUL
+                2.创建普通索引
+                    1.创建表时
+                        index(字段名1),
+                        index(字段名2),
+                        ...
+                    2.已有表
+                        create index 索引名 on 表名(字段名)
+                3.查看
+                    1.desc 表名
+                    2.show index from 表名\G
+                4.删除
+                    drop index 索引名 on 表名
+            2.唯一索引(unique)
+                1.使用规则
+                    1.可设置多个字段
+                    2.约束:
+                        字段值不允许重复, 允许为NULL
+                    3.KEY标志:
+                        UNI
+                2.创建
+                    1.创建表时
+                        unique(字段名1),
+                        unique(字段名2),
+                        ...
+                    2.已有表
+                        create unique index 索引名 on 表名(字段名)
+                3.查看, 删除同普通索引
+                    Non_unique:
+                        0 - -> 唯一索引
+                    Non_unique:
+                        1 - -> 普通索引
+            3.主键(primary key) & &自增长属性(auto_increment)
+                1.使用规则
+                    1.只能有一个主键字段
+                    2.约束:
+                        不允许重复, 不能为NULL
+                    3.KEY标志:
+                        PRI
+                    4.通常设置记录编号字段 id 为主键, 唯一锁定一条记录
+                2.创建
+                    1.创建表时(常用)
+                        id int primary key auto_increment,
+                    2.已有表
+                        alter table 表名 add primary key(字段名)
+                    3.删除
+                        1.先删除自增长属性
+                            alter table 表名 modify id int
+                        2.删除主键
+                            alter table 表名 drop primary key
+                    4.指定自增长属性起始值
+                        1.创建表时
+                        create table 表名(
+                            id int primary key auto_increment,
+                            ...
+                        )auto_increment = xxx
+                        2.已有表
+                            alter table 表名 auto_increment = xxx
+            4.外键(foreign key)
+                1.定义:
+                    当前表字段值从另一个表的范围内选择
+                2.语法:
+                    foreign key(参考字段名)
+                    references 主表(被参考字段名)
+                    on delete 级联动作
+                    on update 级联动作
+                3.使用规则
+                    1.主表, 从表的数据类型要一致
+                    2.主表被参考字段:
+                        主键
+                4.示例
+                    表1 缴费信息(财务)
+                        学号(id)      姓名      班级      缴费金额
+                            1       唐伯虎     AID1805     300
+                            2       点秋香     AID1805     200
+                    表2 学生信息(班主任)
+                        学号(id)      姓名      缴费金额
+                5.删除外键
+                    1.查看外键名:
+                        show create table 表名
+                        eg.:
+                            CONSTRAINT `bjtab_ibfk_1`(CONSTRAINT后的字符即为外键名)
+                    2.删除外键:
+                        alter table 表名 drop foreign key 外键名
+                6.级联动作
+                    1.cascade
+                        数据级联删除, 更新(参考字段)
+                    2.restrict(默认)
+                        从表有相关联记录, 不允许主表操作
+                    3.set null
+                        主表更新, 从表相关联记录字段值自动设置为NULL
+                7.已有表添加外键(只有再添加, 没有修改)
+                    alter table 从表名 add
+                    foreign key(参考字段名) references 主表(被参考字段名)
+                    on delete ...
+                    on update ...
+
+    13.数据导入
+        1.把文件系统的内容导入到数据的表中
+        2.命令格式
+            load data infile '文件名'
+            into table 表名
+            fileds terminated by '分隔符'
+            lines terminated by '\n'
+        3.将scoretable.csv文件导入到db3库下的score表中
+            1.查看搜索路径
+                show variables like "secure_file_priv"
+            2.执行复制命令
+                sudo cp 文件名 搜索路径
+                sudo cp / home / tarena / scoretable.csv / var / lib / mysql - files/
+            2.创建库, 表(utf8字符集)
+                1.create database db3 character set utf8
+                2.use db3
+                3.create table score(
+                    id int,
+                    name varchar(20),
+                    score decimal(5, 2),
+                    phone char(11),
+                    class char(7)
+                )character set utf8
+            3.执行导入语句
+                load data infile '/var/lib/mysql-files/scoretable.csv'
+                into table score
+                fields terminated by ','
+                lines terminated by '\n'
+        4.文件权限问题
+            修改文件权限
+                chmod + rw( / 666) 文件名
+                r:
+                    4 w:
+                        2 x:
+                            1
+        5.把excel文件转为csv文件
+    14.数据导出
+        1.将数据库中表记录保存到系统文件里
+        2.语法格式
+            select ...from 表名
+            into outfile "文件名"
+            fields termiated by '分隔符'
+            lines terminated by '\n'
+        3.注意:
+            1.导出的内容完全由SQL查询语句决定
+            2.路径必须制定为数据库搜索的绝对路径
+    15.表的复制
+        1.语法
+            create table 表名 select ... from 表名
+        2.只复制表结构
+            create table 表名 select * from 表名 where false
+    16.嵌套查询(子查询)
+        1.定义:
+            把内层的查询结果作为外层的查询条件
+        2.select ... from 表名 where 字段名 运算符(select ...)
+    17.多表查询
+        1.两种方式
+            1.select 字段名列表 from 表1, 表2
+            不加where条件时, 笛卡尔积:
+                前表的所有记录匹配后表的每一条记录
+            2.select 字段名列表 from 表1, 表2 where 条件
+mysql > select sheng.s_name, city.c_name from sheng, city
+    -> where sheng.s_id = city.cfather_id
+mysql > select sheng.s_name, city.c_name, xian.x_name from sheng, city, xian
+    -> where sheng.s_id = city.cfather_id and city.c_id = xian.xfather_id
+
+    18.连接查询
+        1.内连接
+            1.语法
+                select ... from 表1 inner join 表2 on 条件
+mysql > select sheng.s_name, city.c_name from sheng inner join city on
+    -> sheng.s_id = city.cfather_id
+多个表:
+mysql > select sheng.s_name, city.c_name from sheng inner join city on
+    -> sheng.s_id = city.cfather_id
+    -> inner join xian on
+    -> city.c_id = xian.xfather_id
+
+        2.外连接
+            1.左连接
+                1.以左表为主显示查询结果(左表全部显示, 没有关联的自动用NULL来补)
+                2.语法
+                    select ... from 表1 left join 表2 on 条件
+            2.右连接
+                1.以右表为主显示查询结果(右表全部显示, 没有关联的自动用NULL来补)
+                2.语法
+                    select ... from 表1 right join 表2 on 条件
+
+    19.数据备份(mysqldump, 在Linux终端中操作)
+        1.命令格式
+            mysqldump - u用户名 - p 源库名 > 路径 / xxx.sql
+        2.源库名的表达方式
+            --all - databases     备份所有库
+            库名                备份单个库
+            -B 库1 库2 ...      备份多个库
+            库名 表1 表2 ...    备份指定表
+
+    20.数据恢复
+        1.命令格式
+            mysql - u用户名 - p 目标库名 < xxx.sql
+        2.恢复所有库中的一个
+        # --one-database
+            mysql - u用户名 - p - -one - database 目标库名 < xxx.sql
+        3.注意:
+            1.恢复库时, 原库中表中的记录会被覆盖
+            2.恢复库时, 库中新增的表不会被删除
+    21.事务和事务回滚
+        1.事务:
+            一件事从开始发生到结束的整个过程
+        2.作用:
+            确保数据的一致性
+        3.事务应用
+            1.开启事务
+                begin
+                # autocommit被禁用,SQL命令不会提交到数据库执行
+            2.终止事务
+                commit
+                | rollback
+        4.注意:
+            事务和事务回滚只针对表记录操作:
+                增, 删, 改有效, 对建库建表无效
+    22.MySQL存储引擎(处理表的处理器)
+        1.基本操作
+            1.查看所有存储引擎
+                show engines
+            2.查看表的存储引擎
+                show create table 表名
+            3.指定存储引擎
+                create table 表名(...)engine = innodb, character set utf8
+            4.修改表存储引擎
+                alter table 表名 engine = myisam
+            5.工作中常用
+                InnoDB, MyISAM
+        2.修改表默认存储引擎
+            1.sudo - i
+            2.cd / etc / mysql / mysql.conf.d/
+            3.cp mysqld.cnf mysqld.cnf.bak
+            4.vi mysqld.cnf
+                [mysqld]
+                default - storage - engine = myisam
+            5. / etc / init.d / mysql restart
+    23.锁
+        1.目的:
+            解决客户端的并发访问的冲突问题
+        2.锁的分类
+            1.锁类型
+                读锁(select):
+                    加读锁后, 其他用户只能查询, 不能修改
+                写锁(增删改)(又称互斥锁, 排他锁):
+                    加写锁后, 其他用户不能做任何操作
+            2.锁粒度
+                表级锁:
+                    可加读锁或者写锁
+                行级锁:
+                    可加读锁或者写锁
+    24.存储引擎特点
+        1.MyISAM特点
+            １．独享表空间
+                表名.frm　表结构
+                表名.myd　表记录
+                表名.myi　索引文件
+            ２．只支持表级锁
+        2.InnoDB特点
+            1.共享表空间
+                表名.frm 表结构和索引信息
+                表名.ibd 表记录
+            2.支持行级锁
+        3.memory
+            表结构存储在硬盘里, 表记录存储在内存中
+            表名.frm
+            服务重启后, 表结构还在, 表记录消失
+        4.如何决定表使用什么存储引擎
+            1.主要用来查询的表用MyISAM
+            2.写操作多的表用InnoDB
+    25.MySQL调优
+        1.选择合适的存储引擎
+        2.创建索引
+            在select, where, order by常涉及到的字段建立索引
+        3.SQL语句的优化
+            1.where条件判断尽量不使用 != , 否则放弃索引全表扫描
+            2.尽量避免NULL值判断, 否则放弃索引全表扫描
+                优化前:
+                    select id from t1 where id is null
+                优化后:
+                    在id字段上设置默认值0, 确保id字段没有NULL值
+                    select id from t1 where id = 0
+            3.尽量避免用or来连接条件, 否则放弃索引全表扫描
+                优化前:
+                    select id from t1 where id = 10 or id = 20
+                优化后:
+                    select id from t1 where id = 10
+                    union all
+                    select id from t1 where id = 20
+            4.模糊查询尽量避免使用前置 %, 否则放弃索引全表扫描
+                select name from t1 where name like "%c%"
+            5.尽量避免使用in 和 not in, 否则放弃索引全表扫描
+                优化前:
+                    select id from t1 where id in(1, 2, 3, 4)
+                优化后:
+                    select id from t1 where id between 1 and 4
+            6.尽量避免使用 *, 最好用具体的字段来代替 * , 不要返回用不到的任何字段
+    26.与Python交互
+        1.交互类型
+            Python3:
+                pymysql $ sudo pip3 install pymysql
+            python2:
+                MySQLdb $ sudo pip install mysql - python
+        2.connect对象
+            1.创建与数据库连接的对象(调用connect()方法)
+                conn = pymysql.connect(参数列表)
+                参数列表:
+                    1.host:
+                        主机地址
+                    2.port:
+                        端口3306
+                    3.user:
+                        用户名
+                    4.passwd:
+                        密码
+                    5.db:
+                        数据库名
+                    6.charset:
+                        编码方式, 推荐使用utf8
+                示例:
+                conn = pymysql.connect(
+                    host='localhost', user='root', passwd='123456', db='db4', charset='utf8')
+            2.连接对象(conn)的方法
+                1.close() 关闭连接
+                2.commit() 提交到数据库执行
+                3.rollback() 回滚
+                4.cursor() 创建游标对象, 用于执行sql语句
+            3.游标对象
+                1.作用:
+                    执行sql语句
+                2.示例:
+                    cur = conn.cursor()
+                    cur.execute('delete from sheng;')
+                3.常用方法
+                    1.execute(SQL命令) 执行SQL命令
+                    2.fetchone() 获取结果集第一条记录
+                    3.fetchmany(n) 获取n条记录
+                    4.fetchall() 获取所有记录
+                    拿一个少一个
+
+            4.pymysql使用流程
+                1.建立数据库连接 conn
+                2.创建游标对象 cur = conn.cursor()
+                3.cur.execute('...')
+                4.提交:
+                    conn.commit()
+                5.关闭:
+                    cur.close()
+                6.断开连接:
+                    conn.close()
+
+    27.ER模型(Entry - Relationship)
+        1.定义
+            实体 - 关系模型, 用于数据库设计
+        2.三个概念
+            1.实体:
+                矩形框
+            2.属性:
+                椭圆形
+            3.关系:
+                实体间的关系
+                1.一对一关系(1: 1)
+                2.一对多关系(1: n)
+                3.多对多关系(m: n)

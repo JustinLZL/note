@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<p>
+		用户名:<input type="text" id="uname">
+		<button onclick="check()">验证</button>
+	</p>
+	<p>
+		<h1 id="ret"></h1>
+	</p>
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+
+		//封装document.getElementById()
+		function $(id){
+			return document.getElementById(id);
+		}
+
+		// function check(){
+		// 	var uname = document.getElementById("uname");
+		// 	var ret = document.getElementById("ret");
+		// 	if (uname.value.length>=6&&uname.value.length<=18) {
+		// 		ret.innerHTML = "通过";
+		// 	}else{
+		// 		ret.innerHTML = "用户名不规范";
+		// 	}
+		// }
+
+		function check(){
+			//在DOM中,允许直接使用元素的ID进行元素的操作
+			//但此方法并不是特别通用
+			//建议:使用document.getElementById()
+			// console.log(uname.value);
+			var val = $("uname").value;
+			if (val.length>=6&&val.length<=18) {
+				$("ret").innerHTML = "通过";
+			}else{
+				$("ret").innerHTML = "用户名不规范";
+			}
+		}
+
+	</script>
+</body>
+</html>

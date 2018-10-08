@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		var year = prompt('enter:year');
+		var month = Number(prompt('enter:month'));
+		var day = Number(prompt('enter:day'));
+
+		var isRun = year%4==0&&year%100!=0||year%400==0; 
+		var totaldays = 0;
+		if (month==1) {
+			console.log(day)
+		}else if (month==2) {
+			totaldays = day+31
+		}else if (month==3) {
+			totaldays = day+31+28
+		}else if (month==4) {
+			totaldays = day+31+28+31
+		}else if (month==5) {
+			totaldays = day+31+28+31+30
+		}else if (month==6) {
+			totaldays = day+31+28+31+30+31
+		}else if (month==7) {
+			totaldays = day+31+28+31+30+31+30
+		}else if (month==8) {
+			totaldays = day+31+28+31+30+31+30+31
+		}else if (month==9) {
+			totaldays = day+31+28+31+30+31+30+31+31
+		}else if (month==10) {
+			totaldays = day+31+28+31+30+31+30+31+31+30
+		}else if (month==11) {
+			totaldays = day+31+28+31+30+31+30+31+31+30+31
+		}else if (month==12) {
+			totaldays = day+31+28+31+30+31+30+31+31+30+31+30
+		}
+
+		if (month>2) {
+			totaldays += isRun
+		}
+		console.log(totaldays)
+
+
+
+
+
+		
+	</script>
+</body>
+</html>

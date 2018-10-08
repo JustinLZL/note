@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<div id="poem1">
+		<h3>h3 in poem1</h3>
+		<p>p1 in poem1</p>
+		<p>p2 in poem1</p>
+		<p>p3 in poem1</p>
+		<p>p4 in poem1</p>
+	</div>
+	<div id="poem2">
+		<h3>h3 in poem2</h3>
+		<p>p1 in poem2</p>
+		<p>p2 in poem2</p>
+		<p>p3 in poem2</p>
+		<p>p4 in poem2</p>
+	</div>
+	<button onclick="getAllp()">P</button>
+	<button onclick="getPoem1p()">p in poem1</button>
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+		function getPoem1p(){
+			var poem1 = $("poem1");
+			var pArr = poem1.getElementsByTagName("p");
+			for (var i = 0; i < pArr.length; i++) {
+				pArr[i].style.background="yellow";
+			}
+		}
+		function getAllp(){
+			var pArr= document.getElementsByTagName("p");
+			for (var i = 0; i < pArr.length; i++) {
+				pArr[i].style.color="#f00";
+				pArr[i].style.fontWeight="bold";
+			}
+		}
+	</script>
+</body>
+</html>

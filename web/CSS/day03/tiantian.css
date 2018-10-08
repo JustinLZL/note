@@ -1,0 +1,141 @@
+/*1.清除默认样式*/
+body,ul,ol,h1,h2,h3,h4,h5,h6,p{
+	margin: 0;
+	padding: 0;
+}
+ul,ol{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: #999;
+}
+img,input{
+	vertical-align: bottom;
+}
+/*2.页面基础样式设置*/
+body{
+	font-family: "Microsoft YaHei",sans-serif;
+	font-size: 12px;
+	color: #999;
+}
+#nav,#banner,#commend,#main{
+	width: 990px;
+	margin: 0 auto;
+}
+/*3.1导航栏制作*/
+#nav{
+	height: 30px;
+	background: #eee;
+	line-height: 30px;
+}
+#nav .nav_right{
+	float: right;
+}
+#nav .nav_right a:hover{
+	color: #f6ab00;
+	text-decoration: underline;
+}
+#nav .nav_right li{
+	float: left;
+	padding:0 5px;
+}
+#nav .nav_right li b{
+	border-left: 1px solid #999;
+	margin-right: 10px;
+}
+/*左侧导航*/
+#nav .nav_left>li{
+	float: left;
+	padding-left: 10px;
+}
+#nav .nav_left>li a:hover{
+	color: #64a131;
+}
+#nav .nav_left>li>u{
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border: 6px solid transparent;
+	border-top: 6px solid black;
+	position: relative;
+	top: 4px;
+}
+/*元素下拉列表需要在隐藏和显示时都不占据文档位置*/
+#nav .nav_left .firstLi{
+	position: relative;
+}
+#nav .nav_left .city{
+	display: none;
+	position: absolute;
+	/*调整元素的堆叠次序,始终在上方显示*/
+	z-index: 100;
+}
+#nav .nav_left .firstLi:hover .city{
+	/*元素设置block 显示的话,在文档中会占位*/
+	/*结合绝对定位,使元素脱流不占位*/
+	display: block;
+}
+/*3.2 轮播图*/
+#banner{
+	margin: 15px auto;
+}
+#banner img{
+	width: 100%;
+	height: 207px;
+}
+/*3.3小图推荐*/
+#commend{
+	height: 112px;
+
+}
+#commend img{
+	width: 240px;
+	margin-right: 10px; 
+	/*浮动是来解决行内块元素默认水平间隙*/
+	float: left;
+}
+#commend .lastImg{
+	margin-right: 0;
+}
+/*3.4 主体部分*/
+#main>p{
+	border-top: 1px solid #ccc;
+	margin-top: 25px;
+	margin-bottom: 10px;
+	padding-top: 15px;
+}
+#main>p>a{
+	color: #333;
+	float: right;
+}
+#main>p>img{
+	width: 356px;
+}
+#main .item{
+	float: left;
+	margin-right: 10px;
+	width: 190px;
+}
+#main .item>.proImg>img{
+	width: 190px;
+	height: 190px;
+	transition: all .3s;
+}
+#main .item>.proImg>img:hover{
+	/*设置元素缩放*/
+	transform: scale(1.2);
+}
+#main .item>.proImg{
+	overflow: hidden;
+}
+#main .item>p{
+	margin-bottom: 3px;
+}
+#main .item>p>a{
+	float: right;
+	margin-bottom: 3px;
+}
+#main .item>p>img{
+	float: right;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<div id="main">
+		<p>p1</p>
+		<p>p2</p>
+		<p>p3</p>
+		<p>p4</p>
+	</div>
+	<button id="btnShow">显示文本</button>
+	<button id="testArr">遍历原生数组</button>
+	<script type="text/javascript" src="jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#btnShow").click(function(){
+				//$pArr是jQuery数组
+				var $pArr = $("#main>p");
+				//循环遍历Arr
+				$pArr.each(function(i ,obj) {
+					// console.log(i);
+					// console.log(obj);
+					// console.log('=======');
+					console.log($(obj).html());
+				});
+			});
+
+			$("#testArr").click(function(){
+				var names = ['一','二','三','四'];
+				// $(names).each(function(i,obj){
+				// 	console.log(i);
+				// 	console.log(obj);
+				// });
+				$.each(names,function(i,obj){
+					console.log(i);
+					console.log(obj);
+				});
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		#main{
+			width: 300px;
+			height: 500px;
+			background: orange;
+			border-radius: 5px;
+			font-size: 18px;
+		}
+	</style>
+</head>
+<body>
+	<p>
+		<button id="btnShow">基本显示</button>
+		<button id="btnHide">基本隐藏</button>
+		<button id="btnDown">滑动显示</button>
+		<button id="btnUp">滑动隐藏</button>
+		<button id="btnIn">淡入显示</button>
+		<button id="btnOut">淡出隐藏</button>
+	</p>
+	<div id="main">
+		I SAW THEE’WEEP
+——George Gordon Byron
+I saw thee weep the big bright tear
+　　Came out that eye of blue;
+　　And then me thought it did appear
+　　A violet dropping dew:
+I see thee smile
+　　the sapphire’s blaze
+　　Beside thee ceased to shine;
+　　It could not match the living rays
+That filled that glance of thine.
+　　As clouds from yonder sun receive
+　　A deep and mellow dye
+　　Which scarce the shade of coming eve
+Can banish from the sky,
+　　Those smiles unto the moodiest mind
+　　Their own pure joy impart;
+　　Their sunshine leaves a glow behind
+　　That lightens on the heart.
+	</div>
+
+	<script type="text/javascript" src="jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#btnShow").click(function(){
+				$("#main").show();
+			});
+			$("#btnHide").click(function(){
+				$("#main").hide();
+			});
+			$("#btnDown").click(function(){
+				$("#main").slideDown(5000);
+			});	
+			$("#btnUp").click(function(){
+				$("#main").slideUp(5000);
+			});		
+			$("#btnIn").click(function(){
+				$("#main").fadeIn(3000);
+			});	
+			$("#btnOut").click(function(){
+				$("#main").fadeOut(3000);
+			});		
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		function stackOper(){
+			var arr=['松江','刘备','张飞'];
+			var len=arr.push('曹操');
+			console.log('push新数组:'+arr);
+			console.log(len);
+			len=arr.pop();
+			console.log('出栈后新数组:'+arr);
+			console.log(len);
+			len=arr.unshift('赵云');
+			console.log('unshift新数组:'+arr);
+			console.log(len);
+			len=arr.shift();
+			console.log('shift新数组:'+arr);
+			console.log(len);
+		}
+	</script>
+	<button onclick="stackOper()">click</button>
+</body>
+</html>

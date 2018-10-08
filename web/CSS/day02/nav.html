@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		body{
+			margin: 0;
+		}
+		#nav{
+			width: 990px;
+			height: 30px;
+			background-color: pink;
+			margin:0 auto;
+		}
+		ul{
+			padding: 0;
+			/*取消ul ol项目符号*/
+			list-style: none;
+		}
+		li{
+			display: inline-block;
+			width: 180px;
+			height: 30px;
+			/*文本居中*/
+			text-align: center;
+			line-height: 30px;
+			background-color: orange;
+			margin-left: 5px; 
+		}
+		a{
+			color: black;
+			text-decoration: none;
+		}
+		li:hover{
+			background-color: green;
+		}
+		li:hover a{
+			color: red;
+		}
+		a:visited{
+			color: gray;
+		}
+	</style>
+</head>
+<body>
+	<!-- 导航条 -->
+	<div id="nav">
+		<!-- 列表 -->
+		<ul>
+			<li><a href="#">首页</a></li>
+			<li><a href="#">新闻</a></li>
+			<li><a href="#">音乐</a></li>
+			<li><a href="#">图片</a></li>
+			<li><a href="#">游戏</a></li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		.red{
+			color: red;
+		}
+		.orangeBack{
+			background: orange;
+		}
+		.hide{
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="uname">
+	<button onclick="btnshow()">显示</button>
+	<button onclick="btnClass()">样式</button>
+	<button onclick="btnRemoveAll()">清空</button>
+	<button onclick="btnRemoveOne()">移除红色</button>
+	<button onclick="btnHide()">隐藏/显示</button>
+	<div id="uname_show"></div>
+	<!-- <div id="main"></div> -->
+	<script type="text/javascript" src="jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		//var $div = $("#main");
+		//console.log($div.html());
+		//$div.html("动态设置的文本");
+		function btnshow(){
+			$("#uname_show").html("<h1>"+$("#uname").val()+"</h1>");
+		}
+
+		function btnClass(){
+			$("#uname_show").addClass("red").addClass("orangeBack");
+		}
+
+		function btnRemoveAll(){
+			$("#uname_show").removeClass();
+		}
+
+		function btnRemoveOne(){
+			$("#uname_show").removeClass("red");
+		}
+
+		function btnHide(){
+			$("#uname_show").toggleClass("hide");
+		}
+	</script>
+</body>
+</html>

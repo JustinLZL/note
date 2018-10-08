@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>table</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<!-- 表格 
+		border :边框属性
+		bgcolor :背景颜色
+				1.使用颜色的英文名称表示
+				2.十六进制表示0-9 A-F
+					#开头 + 六位数字
+					数字每两位为一组代表三原色中的一个
+					第一组为红色,第二组为绿色,第三组为蓝色
+		align :设置表格在窗口中的水平显示方式
+		valign :不起作用
+	-->
+	<table border="1px" width="500" height="500" bgcolor="salmon"
+			align="center" valign="middle">
+		<!-- tr(table row):创建行
+			align :设置整行文本内容的水平对齐方式
+			valign :设置整行文本内容的垂直对齐方式
+			用于td 是设置某一单元格的水平和垂直对齐方式
+		 -->
+		<tr>
+			<!-- 在行中创建单元格,用来存储数据 -->
+			<td align="center">Kobe</td>
+			<td valign="top">James</td>
+			<td>Simmons</td>
+			<td>Nash</td>
+			<td>Chris Paul</td>
+		</tr>
+		<tr align="center" valign="bottom">
+			<td>Kobe</td>
+			<td>James</td>
+			<td>Simmons</td>
+			<td>Nash</td>
+			<td>Chris Paul</td>
+		</tr>
+		<tr>
+			<td>Kobe</td>
+			<td>James</td>
+			<td>Simmons</td>
+			<td>Nash</td>
+			<td>Chris Paul</td>
+		</tr>
+	</table>
+</body>
+</html>

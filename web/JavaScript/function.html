@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		function isRun(){
+			var year = Number(prompt('enter:'))
+			return year%4==0&&year%100!=0||year%400==0;
+		}
+
+		console.log(isRun());
+	</script>
+
+	<button onclick="alert(isRun());">判断闰年</button>
+</body>
+</html>

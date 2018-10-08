@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	用户名:<input type="text" id="uname">
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+		window.onload=function(){
+			// $("uname").onkeydown=function(event){
+			// 	console.log(event);
+			// }
+			// $("uname").onkeypress=function(event){
+			// 	console.log(event);
+			// }		
+			$("uname").onkeyup=function(){
+				alert(this.value);
+			}
+		}
+
+	</script>
+</body>
+</html>

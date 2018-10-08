@@ -1,0 +1,114 @@
+http://176.122.13.185
+任务1:
+	1.创建数据库 - FruitDay
+	2.在FruitDay项目中完成数据的设置
+	3.同步基础设置到数据库中
+任务2:
+	1.创建Models - Users
+	2.包含以下字段
+		1.手机号 - uphone,长度20
+		2.密码 - upwd,长度20
+		3.电子邮箱 - uemail
+		4.用户名 - uname,长度20
+		5.是否激活 - isActive,布尔类型,默认为1
+	3.同步到数据库
+任务3:注册前的数据验证
+	1.手机号:
+		1.不能为空
+		2.号码格式(使用正则)
+		3.验证是否存在
+		4.给出提示 通过 / 错误内容
+	2.密码:6位以上
+	3.确认密码:必须与密码一致
+	4.用户名:不能为空
+	5.邮箱:
+		1.不能为空
+		2.格式(使用正则)
+注册 
+登录
+首页的登录信息显示
+	如无用户登录,显示[登录][注册有惊喜]
+	已登录时,显示
+		欢迎:xxx 退出(超链接)
+	使用AJAX判断登录信息
+		网页加载时就判断是否有登录信息
+	推荐步骤
+		1.判断session中是否有登录信息
+		2.退出时,清除session以及cookies中的登录信息
+			resp.delete_cookie('key')
+
+任务4:
+	1.创建商品类型的Models
+		名称:GoodsType
+			字段:
+				1.title - 商品类型的名称
+				2.picture - 商品图片
+					models.ImageField(upload_to="static/upload/goodstype")
+				3.desc - 商品类型描述
+	2.创建商品的Models
+		名称:Goods
+			字段:
+				1.title - 商品名称
+				2.price - 商品价格
+				3.spec - 商品规格	
+				4.picture - 商品图片
+					models.ImageField(upload_to="static/upload/goods")
+				5.goodsType - 商品类型
+				6.isActive - 是否上架
+					models.BooleanField(default=True)
+
+
+按照数据的存储顺序,按照商品的类别进行商品的加载
+	1.使用AJAX向服务器端发送请求,并接受数据(包含各个类别,以及类别下的商品)
+		1.查询所有的商品类型 - GoodsType
+		2.循环遍历商品类型,并查询每个类型对应的商品
+	2.在前端中,对数据进行解析,按照HTML规定好的格式,进行显示
+
+[
+	{
+		'type': '{
+			"title": "\\u793c\\u54c1\\u5361\\u5238", 
+			"picture": "static/upload/goodstype/t4.png", 
+			"desc": "\\u6709\\u5173\\u793c\\u54c1\\u5361\\u5238\\u7684\\u6240\\u6709\\u5185\\u5bb9\\uff0e"
+		}', 
+		'goods': '[
+			{
+				"model": "index.goods", 
+				"pk": 6, 
+				"fields": {
+					"title": "\\u8d2d\\u7269\\u5361", 
+					"price": "500.00", 
+					"spec": "1\\u5f20", 
+					"picture": "ststic/upload/goods/1-270x270-701-CB41CHUW.jpg", 
+					"goodsType": 1, 
+					"isActive": true
+				}
+			}, 
+			{
+				"model": "index.goods", 
+				"pk": 2, 
+				"fields": {
+					"title": "\\u793c\\u54c1\\u5361", 
+					"price": "100.00", 
+					"spec": "1\\u5f20", 
+					"picture": "ststic/upload/goods/1-270x270-695-F2BSB4DC.jpg", 
+					"goodsType": 1, 
+					"isActive": true
+				}
+			}
+		]'
+	}
+]
+
+
+添加购物车
+	1.点击购物车按钮时,验证用户是否登录
+		已登录,允许将数据加入购物车
+		未登录,给出提示
+	2.添加到购物车
+		使用AJAX,将商品ID传递给服务器,服务器从session中取出用户的uid
+		如果购买的商品在购物车中已经存在,则数量+1
+		否则,将数据插入数据库,数量为1
+
+
+

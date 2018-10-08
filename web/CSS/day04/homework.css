@@ -1,0 +1,44 @@
+p{
+	margin:0;
+	color: #555;
+}
+span{
+	color: #999;
+}
+.container{
+	width: 1040px;
+	height: 540px;
+	margin: 0 auto;
+	padding-top: 8px;
+}
+.detail{
+	width: 195px;
+	height: 240px;
+	position: relative;
+	margin-right: 8px;
+	margin-top:2px; 
+	display: inline-block;
+}
+.title{
+	width: 1020px;
+	border-top: 1px solid #cecece;
+	padding-top: 8px;
+}
+.title a{
+	float: right;
+	text-decoration: none;
+	color: #555;
+
+}
+.stuff{
+	width: 195px;
+	height: 195px;
+	float: left;
+}
+
+.car{
+	float: right;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<h3>h3</h3>
+	<p>p1</p>
+	<p>p2</p>
+	<p>p3</p>
+	<p>p4</p>
+	<button onclick="getAllP()">get all p</button>
+	<script type="text/javascript" src="jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		function getAllP(){
+			var $p = $('p');
+			// console.log($p);
+			//将$p中的所有元素文本颜色变为红色
+			// $p.css("color","red");
+			$p.css({
+				"color":"#f00",
+				"background-color":"yellow",
+				"font-size":"24px",
+				"font-weight":"bold"
+			})
+		}
+	</script>
+</body>
+</html>

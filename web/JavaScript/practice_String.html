@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		//1.创建一个数组,初始化若干数据(英文大小写,数字)
+		//2.生成一个四位的随机验证码,从数组中获取
+			//Math.random() #生成[0,1)之间的小数
+			//parseInt(Math.random()*arr.length)
+		//3.将验证码字符串通过prompt()展示给用户
+		//4.比较用户输入的字符与验证码是否一致并给出提示(忽略大小写)
+
+		function getCode(){
+			var arr=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',1,2,3,4,5,6,7,8,9,0,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+			var code='';
+
+			for (var i = 0; i < 4; i++) {
+				var r=parseInt(Math.random()*arr.length);
+				code+=arr[r];
+			}
+
+			var input=prompt('验证码:'+code);
+			if (code.toLowerCase()==input.toLowerCase()) {
+				console.log('success');
+			}else{
+				console.log('fail',input);
+			}
+		}
+
+	</script>
+	<button onclick="getCode()">验证码</button>
+</body>
+</html>

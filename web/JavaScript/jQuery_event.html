@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<button id="btn1">点我试试</button>
+	<button id="btn2">再点我试试</button>
+	<script type="text/javascript" src="jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		// DOM树加载后要执行的操作
+		$(function(){
+			//为#btn绑定click事件
+			$("#btn1").bind("click",function(){
+				alert("点你咋地");
+			});
+		});
+
+		$("#btn2").click(function(){
+			alert("又点你咋地");
+		});
+	</script>
+</body>
+</html>

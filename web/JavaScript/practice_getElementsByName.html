@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+<!-- 	<p>
+		<input type="radio" name="gender">男
+		<input type="radio" name="gender">女
+		<input type="radio" name="gender">未知
+	</p>
+
+	<button onclick="check()">normal button</button>
+
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+		function check(){
+			var arr = document.getElementsByName("gender");
+			var isChecked = false;
+			for (var i = 0; i < arr.length; i++) {
+				if(arr[i].checked){
+					isChecked = true;
+					break;
+				}
+			}
+			if (isChecked) {
+				alert("通过");
+			}else{
+				alert("请选中一项");
+			}
+		}
+	</script> -->
+	<p>
+		<input type="checkbox" onclick="check()" id="checkAll">全选
+		<input type="checkbox" name="hobby">吃
+		<input type="checkbox" name="hobby">喝
+		<input type="checkbox" name="hobby">玩
+		<input type="checkbox" name="hobby">乐
+	</p>
+
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+		function check(){
+			var arr = document.getElementsByName("hobby");
+			for (var i = 0; i < arr.length; i++) {
+				if($("checkAll").checked){
+					arr[i].checked = true;
+				}else{
+					arr[i].checked = false;
+				}
+			}
+		}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+1.表格
+	<table>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	1.table 的属性
+		width
+		height
+		border	默认以像素为单位
+		bgcolor	颜色值的表示:1.单词 2.十六进制
+		align 	设置表格在窗口中的位置:left/center/right
+		cellspacing 设置单元格与边框之间的距离
+		cellpadding 设置单元格内容框与边框的距离
+	2.tr/td 可用的属性
+		width
+		height
+		bgcolor
+		align	设置单元格内容的水平对齐方式
+		valign 	设置垂直方向对齐方式:top/middle/bottom
+	3.td 独有的属性
+		rowspan 设置单元格跨行合并,取值为数字
+		colspan 设置单元格跨列合并,取值为数字
+		*单元格合并,不管是跨行还是跨列,都是对单元格自身td的操作,设置单元格合并之后,注意调整表格结构
+	4.表格结构
+		<table>
+			<thead>
+				<tr>
+					<td></td>
+				</tr>
+			</thead>	
+			<tbody>
+				<tr>
+					<td></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td></td>
+				</tr>
+			</tfoot>		
+		</table>
+		thead tbody tfoot 可以省略,如果不写,表格中的所有内容会自动加入tbody中
+		thead tfoot 用来将一行或是若干行分组作为表格的头部和尾部信息
+	5.表格的标题及首行文本特殊样式
+		<table>
+			<caption>表格标题</caption>
+			<tr>
+				<th></th>
+			</tr>
+		</table>
+		<caption>用于设置表格标题,必须作为表格第一个子元素使用
+		<th>用法同<td>,并自带文本居中和加粗效果
+
+2.表单
+	1.作用:向服务器发送数据
+	2.基本语法
+		<form action="数据目的地" method="发送方式">
+
+		</form>
+
+		属性:
+			action 指定表单数据提交到服务器中的哪个文件,属性值为文件路径
+			method 指定数据提交的方式 常用的:get/post
+				注意:
+					get 请求:数据会被拼接在URL后面直接发送(明文传输)
+						1.安全性较低
+						2.数据大小受限,最大为2k
+						3.默认的提交方式
+					post 请求:数据会被打包单独发送
+						1.隐式提交给服务器,安全性高
+						2.数据大小不受限制
+	3.表单控件(重点)
+		1.文本输入框和密码框
+		<input type="" name="" placeholder="">
+			type:指定控件类型
+				text 		文本输入框
+				password 	密码框
+			name:给当前控件取名,缺少的话无法提交
+			placeholder:设置用户输入前的提示文本
+		2.单选和复选框
+		<input type="" name="" value="" checked/>
+			type:
+				radio		单选框
+				checkbox	复选框
+			name:用来定义控件名称并且分组,一组按钮的name属性必须一致
+			value:用来设置控件的值,用于发送给服务器
+			checked:设置按钮默认选中状态
+		3.隐藏域:隐式发送一些附加信息,用户不可见
+			<input type="hidden" name="userid" value="101"/>
+			<input type="hidden" name="other" value="用户隐私"/>
+		4.文件上传
+			<input type="file" name="userimg"/>
+		5.文本域
+			<textarea name="userinfo" cols="20" rows="5"></textarea>
+			clos:指定文本域默认显示的列数,一行能够显示的英文字符量,中文减半
+			rows:指定文本域默认显示的行数
+			disabled:可用于所有表单控件,作用为禁用表单控件
+		6.下拉菜单
+			<select name="area">
+				<option value="BJ">北京</option>
+				<option value="SH">上海</option>
+				<option value="SZ">深圳</option>
+			</select>
+			下拉菜单分组
+			<select name="address">
+				<optgroup label="广东省">
+					<option value="GZ">广州</option>
+					<option value="SZ">深圳</option>
+					<option value="ZS">中山</option>
+				<optgroup label="河北省">
+					<option value="SJZ">石家庄</option>
+					<option value="BD">保定</option>
+				</optgroup>
+			</select>
+			value:最终发送给服务器的数据
+			optgroup:用来对选项分组,通过label属性设置组名
+			option:设置具体的选项
+		7.提交按钮  重置按钮  普通按钮
+			1.提交按钮<input type="submit">
+				将表单数据发送给服务器
+			2.重置按钮<input type="reset">
+				重置当前表单数据到初始状态
+			3.普通按钮<input type="button" value="按钮名">
+				需要通过value属性设置显示文本
+			4.普通按钮<button type="">按钮名</button>
+				type:
+					submit(效果同1)
+					reset(效果同2)
+					button(效果同3)
+		8.label for ID
+			<input type="radio" value="male" id="male">
+			<label for="male">男</label>
+			使用label标签显示文本,将label的标签属性for的属性值设置为将要绑定的表单控件id值,实现点击文本跟点击控件一样的效果
+			maxlength:设定输入框可输入的最大字符数
+
+		9.取色板
+		<input type="color" name="colorpick">

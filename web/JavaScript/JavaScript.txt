@@ -1,0 +1,921 @@
+1.JavaScript概述
+	1.JS是一种专门运行于JS解释器/引擎中的解释型脚本语言
+	2.JS发展史
+		1.1992年CMM(C--),更名为ScriptEase
+		2.1995年LiveScript,更名为JavaScript
+		3.1996年JScript(微软的)
+		4.1997年网景找到了ECMA(欧洲计算机制造商联合会).网景将JS的核心模块交给了ECMA,从此JS的核心更名为ECMA Script,简称ES
+	3.JS的组成:
+		1.核心:ECMA Script
+			包含了JS中最基本的语法规范
+		2.浏览器对象模型:BOM
+			Browser Object Model
+			允许JS操作浏览器
+		3.文档对象模型:DOM
+			Document Object Model
+			允许JS操作HTML中的内容
+2.JS的使用方式(重点)
+	1.浏览器控制台中输入代码并执行
+		测试时使用
+			console.log();
+	2.JS的使用方式
+		1.在元素事件中编写JS代码
+			事件:是用户在元素上所激发的一些操作
+			onclick:当用户点击元素时要做的操作
+				语法:
+					<ANY onclick="JS执行代码">
+				e.g.<button onclick="console.log('点你咋地')">点我试试</button>
+		2.将代码嵌入在网页的<script></script>标记中
+			在网页的任意位置处,都可以嵌入一个<script></script>标记
+			语法:
+				<script>
+					JS可执行的代码段落
+				</script>
+			注意:
+				1.一个网页中允许有若干多对<script>
+				2.<script>标记有顺序之分,先写先执行
+				3.网页加载时就执行
+
+			document.write("向网页中输出的一句话");
+			e.g.
+				<script>
+					document.write("<h1>向网页中输出的一句话</h1>");
+				</script>
+
+		3.在网页中,引入外部的JS文件
+			1.创建JS文件(xxx.js),编写JS代码
+			2.在网页上对JS文件进行引入
+				<script src="js文件路径"></script>
+				注意:
+					1.<script>标记必须是成对的
+					2.在引入的标记中不允许编写其他的JS脚本
+3.JS的基础语法
+	1.JS都是由语句组成的
+		1.由运算符,关键字 或 表达式组成
+		2.JS中严格区分大小写
+			e.g.:console.log(''); #需要全小写
+		3.每条语句都要以';'表示结束
+	2.注释
+		1.单行注释://需注释内容
+		2.多行注释:/*需注释内容*/
+4.JS中的变量和常量
+	1.声明变量
+		声明:var 变量名;
+		赋值:变量名=值;
+		声明并赋值:var 变量名=值;
+		e.g.:
+			var uname="小鸣";
+			console.log(uname);
+
+			var uname='隔壁老王',uage=35,ugender; #同时声明多个变量
+		注意:
+			1.在声明变量时,尽量使用var关键字,不用var声明的变量是全局变量
+			2.声明变量如果未赋值,默认值为undefined
+			3.使用未声明的变量则为语法错误
+	2.变量名的命名规范
+		1.变量名不能是JS中的关键字或保留关键字
+		2.由字母,数字,下划线以及$组成
+		3.不能以数字开头
+		4.尽量不要重名,重名会导致后者数据覆盖前者
+		5.尽量要见名知意
+		6.如无特殊需求,尽量使用小驼峰命名法
+			var userName;
+			注意:不能使用name作为变量名
+	3.变量的使用
+		1.为变量赋值
+			只要变量出现在赋值符号的左边,一律是赋值操作
+		2.获取变量的值
+			只要变量没有出现在赋值符号的左边,一律是取值
+			var age = 35;//赋值
+			console.log(age);//取值
+			age = age + 35;//等同于age += 35;先取值后赋值
+	4.常量
+		1.常量:一经声明就不允许被修改的数据
+		2.语法
+			const 常量名=值;
+			注意:
+				1.常量声明好之后是不允许修改的,所以必须声明时就要赋初始值
+				2.常量名通常采用全大写形式
+	*精度丢失:保留到n位小数
+		var l = 3.1415926;
+		//任何一个数字都有一个方法:toFixed()
+		l = l.toFixed(n); #n取数字,保留n位小数
+5.数据类型
+	JS中的数据类型可以分为两大类
+	1.基本数据类型(原始类型)
+		1.number类型
+			数字类型,可以表示32位的整数以及64位的浮点数
+			整数:
+				十进制:var num=30;
+				//以0开头的一定是八进制
+				八进制:var num=010;#8
+				//以0x开头的一定是十六进制
+				十六进制:var num=0x21;#33
+				注意:以上数字在打印的时候都是按照十进制值进行打印输出的
+			小数:
+				小数点计数法:var num=123.456;
+				指数计数法:var num=1.4e2;#1.4*10**2
+		2.string类型
+			字符串类型
+			注意:使用时,必须使用""或''引起来
+			*JS中的字符串由Unicode字符,数字,标点组成
+			1.查看字符的Unicode码
+				var str="零一二三四";
+				str.charCodeAt(x).toString(y);# x:要查的字符在字符串内对应的下标,默认值为0;y:2/8/10/16,默认值为10
+			2.将Unicode码转换为对应的字符
+				var str="\u5f20"; #"张" \u后接4位十六进制的数字,不够4位在前面补0
+			3.中文范围
+				"\u4e00"~"\u9fa5"
+			4.转义字符
+				\n:换行
+				\t:一个制表符
+				\':'
+				\":"
+				\\:\
+		3.boolean类型
+			布尔类型,只用于表示真(True)或假(False)
+			注意:boolean类型可以参与到数字运算的,True=1,False=0
+			var r = true + 1 #r=2
+		4.查看数据类型
+			使用typeof()或typeof
+			e.g.
+				var str = 'Hello world';
+				console.log(typeof(str));
+				console.log(typeof str);
+	2.引用数据类型
+
+6.数据类型转换
+	1.隐式转换
+		大部分加法运算时,如果数据类型不一致的话可以进行隐式转换
+		1.数字 + 字符串:将数字转换为字符串
+			var num = 15;
+			var str = "18";
+			var r = num + str; #1518
+			var r = "15"+18+15; #151815
+			var r = 15+18+"15"; #3315
+		2.数字 + 布尔:将布尔转化为数字
+			var r = 35 + true; #36
+		3.字符串 + 布尔:将布尔类型转换为字符串
+			var r = "你好" + true; #你好true
+		4.布尔 +布尔 :
+			两个布尔在一起的任何运算都是先将布尔转化为数字再做数值运算
+				var r = true + false; #1
+				var r = true * false; #0
+		注意:如果-,*,/,%两端都是数字格式的字符串,可以按照数字的方式进行运算
+			"35"-"48":-13
+			"35"-"你好":NaN(Not A Number)
+	2.显示转换
+		1.toString()
+			作用:将任意类型的数据转换为字符串,并返回转换后的结果
+			var num=15;
+			var r=num.toString(); #var r=num+"";
+		2.parseInt()
+			作用:将任意类型的数据尽量转换为整数,如果实在无法转换的话则返回NaN
+				var r = parseInt("13");
+				r : 13 (number)
+				var r=parseInt("13你好");
+				r :	13
+				var r=parseInt("你好13");
+				r : NaN
+				var r=parseInt("13.5");
+				r :	13
+		3.parseFloat()
+			作用:尽量将任意类型的数据转换为小数
+				var r=parseFloat("35.7");
+				r : 35.7
+				var r=parseFloat("13.3你好");
+				r :	13.3
+				var r=parseFloat("你好13.3");
+				r : NaN
+		4.Number()
+			作用:将指定的数据转换成数字,只要包含非法字符,结果就为NaN
+				var r=Number("35.7");
+				r : 35.7
+				var r=Number("13.3你好");
+				r :	NaN
+	*注意:只要是在网页中获取的数据,一律都是字符串类型
+7.运算符
+	1.算术运算符
+		+ - * / % ++(自增) --(自减)
+		% 使用场合:
+			1.倍数 或 奇偶性
+			2.获取某数字的最后几位
+				var num = 1234;
+				var ge = num % 10;
+
+				num = parseInt(num/10);
+				var shi = num %10;
+
+				num = parseInt(num/10);
+				var bai = num %10;
+
+				qian = parseInt(num/10);
+
+		++:自增运算符,在自身数据基础上只做+1操作
+		--:自减运算符,在自身数据基础上只做-1操作
+
+		语法:
+			变量++ 或 ++变量
+			变量-- 或 --变量
+
+		变量++:要先使用变量的值,再进行自增
+			var num = 5;
+			console.log(num++);//5
+			console.log(num);//6
+		++变量:与变量++相反
+			var num = 5;
+			console.log(++num);//6
+			console.log(num);//6
+	2.关系运算符(比较运算符)
+		只要是使用关系运算符比较出来的结果一定是Boolean
+		> >= < <= == != === !==
+		1.如果元素符两端有一个操作数是数字的话,另一个也会通过Number()转换成数字,再进行比较
+		*NaN与任何数据做!=,结果都为TRUE;其余对比操作都为FALSE
+		2.两端皆为字符串时,比较每个字符Unicode码的大小
+			e.g.:
+				"50">"5" //true;
+				"10">"5" //false;
+		=== :比较数据和数据类型必须都相等的情况下,整个结果才为真
+		!== :比较数据和数据类型,只要有一样不等,结果就为真
+	3.逻辑运算符
+		!(逻辑非)等同于python中的not,对现有条件取反(非真即假,非假即真)
+		&&(逻辑与)等同于python中的and,关联两个条件,两个条件都为真时结果才为真
+		||(逻辑或)等同于python中的or,关联两个条件,两个条件有一个为真时结果就为真
+	4.位运算符
+		1.按位与:&
+			3 & 5 #1
+			3 011
+			5 101
+			-----
+			  001
+			使用场合:判断一个数字的奇偶性
+				任意数字与1做按位与操作,结果为1是奇数,结果为0是偶数
+		2.按位或:|
+			5 | 3 #7
+			使用场合:任意小数与0做按位或操作,快速取整(抛弃小数位,保留整数位)
+		3.按位异或:^
+			3 ^ 5 #6
+			使用场合:在不借助第三方变量的情况下,交换两个数值的位置
+	5.条件运算符
+		单目运算符/一元运算符:只有一个操作数的运算符
+			++ -- ! typeof -
+		双目运算符/二元运算符:有两个操作数的运算符
+			+ - * / % && || & | ^ < > ...
+		三目运算符/三元运算符:有三个操作数的运算符
+			条件运算符 ? :
+				语法:
+					条件表达式 ? 表达式1 : 表达式2;
+					先判断条件表达式的结果,如果为true,则执行表达式1的内容,否则执行表达式2
+
+8.流程控制
+	1.程序的流程结构
+		1.顺序结构
+		2.分支结构(选择结构)
+		3.循环结构
+	2.分支结构
+		1.if 结构
+			1.
+				if(条件){
+					满足条件时执行的语句块;
+				}
+
+				注意:
+					1.条件不是Boolean类型,以下情况视为false
+						if(0.0){}
+						if(0){}
+						if(""){}
+						if(undefined){}
+						if(null){}
+					2.省略{}的话,if只能控制随后的第一条语句
+			2.
+				if(条件){
+					语句块1
+				}else{
+					语句块2
+				}
+			3.
+				if(条件1){
+					语句块1
+				}else if(条件2){
+					语句块2
+				}
+				}else if(条件n){
+					语句块n
+				}
+				}else(条件n+1){
+					语句块n+1
+				}		
+
+		2.switch 结构
+			特点:只能用在等值判断的场合
+			语法:
+				switch(变量){
+					case 值1:
+						语句块1
+						break;//可选,跳出switch结构
+					case 值2:
+						语句块2
+						break;//同上
+					...
+					default:
+						语句块n
+						//可选,当所有的case都未匹配上的时候才会执行
+				}
+				注意:
+					1.变量和各个case块后面的值,是采用 === 的方式来匹配的
+					2.如果case后面不增加break的话,则从匹配的case块开始向下依次执行(不判断),知道结束或遇到break为止
+	3.循环结构
+		1.循环作用
+			重复地执行相同或相似的代码
+		2.循环二要素
+			1.循环条件
+			2.循环操作
+			3.while 循环
+				1.语法
+					while(条件){
+						循环操作
+					}
+			4.do..while 循环
+				1.使用场合:循环从弹框中录入数据,并将录入的数据打印在控制台上,直到输入exit 为止
+				2.语法
+					do{
+						循环操作
+					}while(条件);
+				3.流程
+					1.先执行循环操作
+					2.再判断循环条件
+					3.如果条件为真,则继续执行循环操作,否则退出循环
+			5.for 循环
+				1.语法
+					for(表达式1;表达式2;表达式3){
+						循环操作
+					}
+					表达式1:循环条件的初始化
+					表达式2:循环条件的判断
+					表达式3:更新循环条件
+				2.流程
+					1.先执行表达式1,声明条件(只执行一次)
+					2.再判断表达式2的值,true/false
+					3.如果条件为true,则执行循环操作,否则退出循环
+					4.执行完循环操作后,再执行表达式3
+					5.再判断表达式2的值,同步骤2
+				3.for VS while
+					1.相同
+						先判断条件,再执行循环操作
+					2.不同
+						while:优先使用在不确定循环次数的场合下
+						for:优先使用在确定循环次数的场合下
+
+	4.循环的流程控制
+		1.break
+			在循环体内使用,用于跳出整个循环结构
+		2.continue
+			在循环体内使用,用于跳出本次循环,继续执行下次循环
+		注意:
+			continue不能用于switch,但是swith嵌套时,continue会作用于其能作用的最近的一个循环.
+	5.循环的嵌套
+		允许在一个循环的内部再出现一个循环
+
+9.函数
+	1.在JS中又称为function,是一段被预定义,并可以独立反复执行并包含多条执行语句的代码块
+	2.在JS中创建函数
+		function 函数名(形参列表){
+			函数体
+			[返回值]//可有可无
+		}
+
+		形参列表:
+			1.如果没有参数,此处为空;
+			2.如果有参数,则编写参数列表;若有多个参数,各个参数间使用','隔开
+			3.有参数的函数在调用时就要传参;若未传参,参数值默认为undefined
+		返回值:
+			1.在函数体内,经过运算后,需要传递给函数调用者的一个值
+			2.返回值需要使用return进行返回,且最多只能返回一个值
+	3.函数的调用
+		在任意JS的合法位置处,都允许做函数的调用
+		var ret = 函数名(实参列表);//有返回值可以用ret来接收;否则不用接收,要接收的话只能收到undefined
+	4.匿名函数
+		1.是一个没有名称的函数,该类函数会针对某一个功能而存在,不能独立声明
+		2.语法
+			function(形参列表){
+				函数体
+			}
+
+			window.onload = function(){
+				函数体
+			}	(网页在加载时要做的事情,如初始化)
+	5.变量的作用域
+		1.指的是变量的可访问范围
+		2.作用域的分类
+			1.局部变量
+				1.使用var关键字声明在某个函数内的变量
+				2.只能在声明的函数内部使用
+			2.全局变量
+				1.在function之外声明的变量
+				2.在function之内声明变量只要不使用var关键字就是全局变量
+				3.全局变量可以应用在各个函数中
+			*全局变量推荐在所有的function之外使用var关键字来声明
+	6.声明提前
+		在JS中使用var声明的变量,在程序执行之前都会被预读到所在作用域的顶端,但赋值还保留在原位
+
+10.数组-Array
+	1.按照线性结构来保存批量数据的数据结构
+		除第一个元素外,每个元素都有一个"前驱元素"
+		除最后一个元素外,每个元素都有一个"后继元素"
+	2.创建数组
+		(使用数组直接量的方式创建)
+		1.创建一个空数组
+			var 数组名 = [];
+		2.创建数组并初始化数据
+			var 数组名 = [元素1,元素2,...];
+		(使用数组的构造函数创建)
+		3.创建一个空数组
+			var 数组名 = new Array();
+		4.创建数组并初始化数据
+			var 数组名 = new Array(元素1,元素2,...);
+	3.数组的使用
+		获取或设置数组的元素的值,一律要使用下标(从0开始)
+		1.更改
+			数组名[下标]=新元素;
+		2.使用
+			数组名[下标]
+		3.给超出数组长度的元素赋值
+			数组名[下标]=新元素;
+			中间未赋值的元素默认为undefined,保证数组的线性结构
+		4.取超出数组长度的元素的值
+			数组名[下标]//undefined
+	4.获取数组的长度
+		属性:length
+		用法:数组名.length
+		使用场合:
+			1.能够找到数组中,要最新插入的元素的位置(向数组尾部增加新元素时使用)
+			2.配合循环,遍历数组中的每个元素(正序倒序)
+	5.常用API
+		1.toString()
+			作用:将数组转换为字符串,默认将数组的元素使用','连接成字符串再返回
+		2.join(Seperator)
+			作用:将数组的元素使用Seperator字符串拼接并返回,Seperator可以为''
+		3.reverse()
+			作用:将数组进行反转
+			注意:该函数会改变现有数组的结构
+		4.sort()
+			1.作用:对现有数组的内容进行排序
+					默认是按照元素的Unicode码进行升序排序
+			2.注意:该函数会改变现有数组的内容
+			3.允许通过自定义的排序规则(排序函数)来指定数字的排序方式
+				语法:arr.sort(排序函数);
+				1.升序的排序函数
+					function sortASC(a,b){
+						//通过返回值来表示a,b的大小关系
+						//返回值为正,表示a>b,需要交换a,b的位置;
+						//为负,表示a<b,两个数字不动;为0,表示a=b,两个数字不动
+						return a-b;//返回b-a即为降序
+					}
+		5.进出栈操作
+			1.push()
+				入栈(压栈),向数组的尾部添加新元素,并返回新数组的长度
+				同等于:arr[arr.length]='';
+			2.pop()
+				出栈(弹栈),删除并返回数组尾部的元素
+			3.unshift()
+				向数组头部添加新元素并返回新数组的长度
+			4.shift()
+				删除并返回数组头部的元素
+	6.二维数组
+		1.声明二维数组
+			var names=[
+				['三点','撒旦恩','sdofj'],
+				['SD破烦','鞍韂','哦军坡'],
+			];
+		2.获取'鞍韂'
+			names[1][1];
+
+11.字符串-string
+	1.声明字符串
+		var str1='字符串1';
+		var str2=String('字符串2');
+		var str3=new String('字符串3');
+	2.length 属性
+		作用:返回当前字符串的长度
+	3.String API
+		1.大小写转换函数(验证码)
+			1.toUpperCase()
+				返回字符串的完全大写形式
+			2.toLowerCase()
+				返回字符串的完全小写形式
+		2.去掉字符串两端的空格
+			方法:trim()
+			注意:该方法不会改变现有字符串,是将去掉空格的字符串进行返回
+		3.获取指定位置的字符
+			1.charAt(index)
+			2.获取指定位置字符的Unicode码
+				charCodeAt(index)
+		4.检索字符串
+			1.indexOf(value,fromIndex)
+				value:查找的子字符串
+				fromIndex:从哪个位置开始查找,如果省略则默认从第一个字符开始查找
+				返回值:返回子字符串第一次出现的下标,如果没有查询到子字符串的话,则返回-1
+			2.lastIndexOf(value,fromIndex)
+				作用:查找value最后一次出现的下标
+				注意:该函数的查找方式是从后往前查找
+		5.截取子字符串
+			函数:substring(start,end)
+			作用:返回从start到end-1之间的字符串,如果省略end则截取到整个字符串的尾部
+		6.分割字符串
+			作用:将具备特殊连接符的字符串拆成字符串数组
+			函数:split(Seperator)
+		7.模式匹配
+			1.作用
+				配合子字符串和正则表达式完成字符串的查找\替换
+			2.正则表达式
+				语法
+					/正则表达式/修饰符;
+					修饰符:
+						i:ignorecase(忽略大小写)
+						g:global(全局匹配)
+						m:multiple(允许多行匹配)
+					e.g.:
+						1.全局匹配2-6位数字
+							/\d{2,6}/g
+						2.匹配'你大爷'
+							/你大爷/g
+			3.函数
+				1.replace(substr/regexp,replacement)
+					在一个字符串中,将substr或满足regexp格式的字符串替换成replacement
+				2.match(substr/regexp)
+					按照指定的子字符串或正则表达式进行匹配,并返回满足格式的子字符串数组
+12.RegExp 对象
+	1.创建正则表达式对象
+		1.var reg=/正则表达式/修饰符;
+		2.var reg=new RegExp("匹配模式","修饰符");
+			var reg = new RegExp("^\\d{6}$"[,"gim"]);
+	2.RegExp 常用方法
+		1.test(string)
+			string:要验证的字符串
+			如果string满足reg对象的格式则返回TRUE,否则返回FALSE
+13.Math 对象
+	1.属性
+		Math.PI
+		Math.E
+	2.方法
+		1.三角函数
+			Math.sin()
+			Math.cos()
+			Math.tan()
+		2.计算函数
+			Math.sqrt(x) #开平方
+			Math.log(x)
+			Math.pow(x,y) #x^y
+		3.数值函数
+			Math.abs(x)
+			Math.max(a,b,c,d)
+			Math.min(a,b,c,d)
+			Math.random() #随机生成[0-1)
+			Math.round(x) #四舍五入
+14.Date 对象
+	1.作用
+		获取客户端的日期时间
+	2.创建Date对象
+		1.获取当前日期对象
+			var date = new Date();
+		2.初始化自定义日期时间对象
+			var date = new Date("2018/08/14 17:25:59");
+	3.方法
+		1.读取或设置当前时间的毫秒数
+			1.getTime()
+				返回自1970-1-1 00:00:00 到date所经过的毫秒数
+			2.setTime()
+				根据给定的毫秒数,结合1970-1-1 计算日期时间
+		2.读取时间分量
+			1.getFullYear()
+				获取当前时间对象的年份
+			2.getYear()
+				返回自1900年以来当前日期所经过的年数
+			3.getMonth()
+				返回0-11的数字表示1-12月
+			4.getDate()
+				返回date对象所对应的日
+			5.getDay()
+				返回date对象所对应的星期?
+				返回0-6表示星期日-星期六
+			6.获取时间
+				getHours() :获取小时
+				getMinutes() :获取分钟
+				getSeconds() :获取秒
+				getMilliseconds() :获取毫秒
+			7.转换为字符串
+				1.toString()
+				2.toLocaleString()
+					将日期对象转换为本地字符串
+				3.toLocaleTimeString()
+					转换为本地时间字符串(时分秒)
+				4.toLocaleDateString()
+					转换为本地日期字符串(年月日)
+
+15.外部对象
+	1.BOM 和 DOM
+		BOM:Browser Object Model
+			浏览器对象模型
+			将浏览器比喻成一个对象-window(网页初始化时自动创建的),可以通过window对象操控浏览器中的内容
+		DOM:Document Object Model
+			文档对象模型
+			将HTML文档比喻成一个对象-document(属于window的一个属性),可以灵活的操作网页上的内容
+	2.widow对象(BOM模型)
+		1.作用
+			表示浏览器
+			window对象下的属性和方法在使用时,可以省略'window.'直接去调用
+			e.g.
+				window.alert()>>alert()
+				window.prompt()>>prompt()
+				window.document>>document
+		2.window中的对话框
+			1.警告框:alert()
+			2.输入框:prompt()
+			3.确认框:confirm("str") #str为确认框弹出的内容
+				点击确定按钮的话,返回true
+				其余所有操作,都返回false
+		3.window中的定时器
+			1.定时器的分类
+				1.周期性定时器
+					每间隔一段时间后,就执行一段程序,反复执行
+				2.一次性定时器
+					在指定的时间间隔只执行一次操作
+			2.周期性定时器
+				1.声明定时器
+					var ret = [window.]setInterval(fun,time);
+						fun:函数,需要周期性执行的操作,可以是匿名函数
+						time:时间周期,以毫秒为单位的数字
+						ret:返回已创建好的定时器对象(清除定时器时会用到)
+				2.清除定时器
+					widow.clearInterval(timer);
+					timer:要清除的定时器对象
+			3.一次性定时器
+				1.声明定时器
+					var ret = widow.setTimeout(fun,time);
+						fun:等待一定的时间后要执行的操作
+						time:要等待的时长,以毫秒为单位的数字
+						ret:返回已创建好的定时器对象
+				2.清除定时器
+					window.clearTimeout(timer);
+					timer:要清除的一次性定时器对象
+		4.window中的属性
+			1.screen属性
+				作用:获取客户端显示器的相关信息
+				属性:
+					1.width/height
+						获取当前屏幕的分辨率
+					2.availWidth/availHeight
+						可用宽度和可用高度
+			2.history属性
+				1.作用:处理当前窗口所访问过的url地址
+				2.属性&方法
+					1.属性:length,表示当前窗口所访问过的url数量
+					2.方法:
+						1.back():后退
+						2.forward():前进
+						3.go(num)
+							在当前页面的基础上前进或后退num步
+							num:取值为正则前进,为负后退
+			3.location属性
+				1.作用
+					表示浏览器上地址栏的信息
+				2.属性&方法
+					1.属性:href
+						表示当前窗口中正在浏览的网页地址
+						为href属性设置一定值,相当于实现浏览器跳转的功能
+					2.方法:reload()
+						重新加载当前网页,等同于刷新操作
+			4.navigator属性
+				1.作用
+					封装了浏览器的相关信息
+				2.属性
+					userAgent:显示浏览器相关信息
+			5.document属性(重点)
+	3.document对象(DOM模型)
+		1.document的概述
+			document对象,是DOM模型中的顶层对象,封装了所有和HTML元素相关的属性,方法以及事件.由于document是属于window对象的核心属性之一,所以不用声明在网页中就可以直接使用
+
+			网页在加载时,会在内存中形成一颗节点树(DOM树).
+			DOM树会封装网页上的所有内容.
+			网页上的每一个元素,每一个属性,每一段文本,都是DOM树上的一个独立的"节点"
+
+			DOM所提供的操作
+				1.查找节点的操作方法
+				2.读取节点的信息
+				3.修改节点的信息
+				4.删除节点
+				5.创建节点
+
+				注意:只要DOM树上的内容产生变化的话,网页也会一同变化
+
+			DOM树上的节点的类型
+				1.元素节点-网页中的一个元素
+				2.属性节点-元素中的一个属性
+				3.文本节点-元素中的文本内容
+				4.注释节点-网页中的一个注释
+				5.文档节点-整个HTML文档
+		2.查找元素节点
+			1.通过元素id查找元素节点
+				前提:元素一定要具备id属性,否则无法查找
+				方法:
+				var elem = document.getElementById("元素id");
+					elem:对应的id的元素在JS中的表现形式-DOM元素/DOM对象
+				DOM对象属性:
+					1.innerHTML
+						修改或获取当前DOM对象的HTML文本
+					2.innerText
+						修改或获取当前DOM对象的普通文本
+					注意:以上两个属性只针对双标记有效
+					3.value
+						该属性只针对表单控件,允许获取或设置表单控件的值
+		3.读取节点的信息
+			1.节点的类型
+				属性:nodeType
+				值:
+					返回1:元素节点
+					返回2:属性节点
+					返回3:文本节点
+					返回8:注释节点
+					返回9:文档节点
+			2.节点名称
+				属性:nodeName
+					元素节点或属性节点:返回标签名或属性名
+					文本节点:返回#text
+					文档节点:返回#document
+					注释节点:返回#comment
+		4.获取或设置元素节点的属性
+			所有元素节点都具备以下方法,用于操作属性:
+			1.getAttribute("attrName")
+				作用:获取指定属性的值
+				attrName:要获取的属性名称
+				返回值:attrName属性对应的值
+			2.setAttribute("attrName","attrValue")
+				作用:设置指定属性的值
+				attrName:要设置的属性名
+				attrValue:要设置的属性值
+			3.removeAttribute("attrName")
+				作用:将attrName属性从节点中删除出去
+		5.元素节点的样式
+			1.使用setAttribute()设置class属性值
+				相当于动态地为元素绑定类选择器
+				elem.serAttribute("class","类选择器");
+			2.使用元素的className属性修改class的值
+				elem.className="类选择器";
+			3.变相地使用内联方式设置样式属性
+				elem.style.css属性名 = 值;
+				e.g.:elem.style.color="red";
+				注意:如果css属性名中包含"-","-"要取消,并且后面单词的首字符要变大写
+				e.g.:elem.style.fontSize="18pt";
+				//设置elem元素的右边框的颜色为红色
+				border-right-color
+				>>elem.style.borderRightColor="red";
+	4.查询节点的方式
+		1.根据id查询
+			document.getElementById():
+		2.根据节点的层级关系查询节点
+			1.parentNode属性
+				返回当前节点的父节点元素
+			2.childNodes属性
+				返回当前节点的所有子元素数组
+			3.children属性
+				返回当前节点的所有子元素数组(元素节点)
+			4.nextSibling
+				获取当前节点的下一个兄弟节点
+				有可能是文本节点
+			5.nextELementSibling
+				获取当前节点的下一个元素兄弟节点
+			6.previousSibling
+				获取当前节点的上一个兄弟节点
+				有可能是文本节点
+			7.previousELementSibling
+				获取当前节点的上一个兄弟元素节点
+		3.通过标签名查询节点-返回数组
+			document|elem.getElementsByTagName("标签名");
+				document:整个文档内查找
+				elem:某个元素内查找
+		4.通过元素的name属性值查询节点
+			语法:document.getElementsByName("name属性值");
+			返回值:包含指定name属性值的元素的数组
+		5.通过元素的class值查询节点
+			语法:document|elem.getElementsByClassName("class");
+			返回:包含指定class属性值的元素的数组
+	5.增加节点
+		1.创建元素节点
+			var elem = document.createElement("元素名");
+			e.g.:
+				var div=document.createElement("div");
+				div.setAttribute("id","container");
+				div.innerHTML="动态创建的文本";
+		2.增加节点到网页上
+			1.document.body.appendChild(elem)
+				相当于向body中追加elem的新元素
+			2.parentNode.appendChild(elem);
+				向parentNode内部追加elem新元素
+			3.parentNode(|document.body).insertBefore(newElem,oldElem);
+				将newElem元素插入到parentNode中oldElem元素之前
+	6.删除节点
+		在DOM中,删除节点的行为只能有父元素发起
+		语法:parentNode.removeChild(elem);
+			删除parentNode中的elem元素
+	7.事件
+		1.通常都是由用户的行为来激发的操作
+		2.触发事件的行为
+			所有事件在绑定的时候必须加on前缀
+			1.鼠标事件
+				1.click事件
+					当鼠标单击元素时触发该事件
+				2.mouseover事件
+					当鼠标移入进元素时的事件
+				3.mouseout事件
+					当鼠标移出元素时的事件
+				4.mousemove事件
+					当鼠标在元素内移动时激发的事件
+			2.键盘事件
+				1.keydown事件
+					当键位按下时所激发的事件
+				2.keypress事件
+					当键位按下时所激发的事件
+				3.keyup事件
+					当键位抬起时所激发的事件
+			3.状态改变事件
+				1.load事件
+					当元素加载完成时所触发的事件(在body中用的多)
+				2.change事件
+					当选项发生改变时所触发的事件(select)
+				3.focus事件
+					当元素获取焦点时所触发的事件(文本框类)
+				4.blur事件
+					当元素失去焦点时所触发的事件(文本框类)
+				5.submit事件
+					当表单被提交时所触发的事件(表单)
+		3.绑定的方式
+			1.在元素中绑定事件
+				<元素 on事件名=""></元素>
+			2.在JS中动态地为元素绑定事件
+				DOM对象.on事件名=function(){
+					事件操作;
+				}
+			注意:在JS动态绑定事件中,允许使用this来表示触发当前事件的DOM元素
+		4.事件行为
+			1.状态改变事件
+				1.load事件
+					通常为body绑定load事件,目的是为了在所有内容都加载完成之后再实现一些初始化的操作
+					1.<body onload="函数()">
+					2.JS中动态绑定
+						window.onload=function(){
+							网页加载完成后,要执行的操作
+						}
+				2.submit事件
+					只有表单被提交时才会被触发
+					注意:该事件需要一个Boolean返回值来通知表单是否要继续被提交.TRUE提交,FALSE阻止提交
+					1.JS中动态绑定
+						表单对象.onsubmit=function(){
+							return true/false;
+						}
+				3.change事件
+					主要场合:在下拉列表中使用,每当选项改变时就会激发一次该事件
+			2.事件对象-event
+				全称:事件参数对象
+				任何一个事件被触发后,都会自动产生一个event对象.
+				event对象中会包含与当前事件相关的一些属性和方法
+				1.获取event对象
+					1.html元素中绑定事件
+						<ANY on事件名="btnClick(event)">
+
+						<script>
+							function btnClick(event){
+								event表示事件对象
+							}
+						</script>
+					2.在JS中动态为元素绑定事件
+						var d1 = document.getElementById("d1");
+						d1.onclick = function(event){
+							event表示事件对象
+						}
+				2.事件对象的常用属性
+					1.事件源
+						1.值得是触发当前事件的元素是谁
+						2.获取事件源
+							通过event.target 获取事件源
+							得到的是一个DOM对象
+					2.鼠标事件的属性
+						鼠标事件:mouseover,mouseout,mousemove,click
+						1.offsetX,offsetY
+							获取鼠标在元素上的坐标点
+							以元素的左上角为(0,0)进行计算的
+					3.键盘事件的属性
+						键盘事件:keydowm,keypress,keyup
+							keydown,keypress事件中允许增加一个返回值,通知浏览器是否要正常处理按下的字符.返回值为TRUE则正常显示字符,否则不显示
+						1.keydown事件
+							只要按下键位,就会触发keydown
+							属性:
+								1.which:按下的键位码(非ASCII码)
+						2.keypress事件
+							只有在字符输出的时候才会触发keypress
+							属性:
+								1.which:要输出的字符的ASCII码
+						3.keyup事件
+							获取字符输出的值可以用到
+				3.事件冒泡
+					阻止事件冒泡
+						event.stopPropagation()

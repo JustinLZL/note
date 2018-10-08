@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<form action="/login/" method="get" id="frm">
+		<p>
+			用户名称:
+			<input type="text" id="uname">
+			<span id="nameRet"></span>
+		</p>
+		<p>
+			用户密码:
+			<input type="text" id="upwd">
+			<span id="pwdRet"></span>
+		</p>		
+		<p>
+			确认密码:
+			<input type="text" id="confirm">
+			<span id="conRet"></span>
+		</p>
+		<p>
+			<input type="submit">
+			<span id="subRet"></span>
+		</p>
+	</form>
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			$("frm").onsubmit=function(){
+				var unameLength = $("uname").value.length;
+				if (unameLength<6||unameLength>18) {
+					$("nameRet").innerHTML="用户名称必须为6-18位";
+					return false;
+				}
+				var pwdLength = $("upwd").value.length;
+				if (pwdLength<6) {
+					$("pwdRet").innerHTML="用户密码必须为6位以上";
+					return false;
+				}
+				if ($("upwd").value!=$("confirm").value) {
+					$("conRet").innerHTML="确认密码必须与用户密码一致";
+					return false;
+				}
+				$("subRet").innerHTML="提交成功";
+				return true;
+			}
+		}
+	</script>
+</body>
+</html>

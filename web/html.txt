@@ -1,0 +1,295 @@
+﻿1.前端 Web
+	1.通俗解释:网页
+	2.网页的运转需要三个参与者
+		1.服务器:用于接收用户的请求并响应,提供数据支撑
+		2.浏览器:电脑上的程序,客户端,用于发送请求并处理服务器返回的数据,图形化呈现给用户
+		3.通信协议:网络请求最常用的:HTTP HTTPS
+	3.服务器及浏览器产品
+		1.服务器:Tomcat  Apache  Nginx  IIS(Internet Information Service)
+		2.浏览器
+			1.五大浏览器(按照浏览器的内核进行划分):
+				1.Chrome  	:	webkit  -轻量化->  blink
+				2.Firefox  	:	Gecko
+				3.IE  		:	Trident
+				4.Safari  	:	webkit
+				5.Opera		:	Presto --> blink
+			2.浏览器内核(也叫引擎):
+				1.渲染引擎:对HTML CSS进行处理
+				2.JS引擎:对JS进行处理
+	4.网页构成
+		静态页面:结构 HTML 和样式 CSS
+		动态交互:JS
+
+2.HTML
+	1.超文本标记语言 HyperText Markup Language
+	2.HTML用来书写页面的结构  文档后缀都是'.html'/'.htm'
+	3.特点:大量的标记确定页面结构和组成
+	4.浏览器页面中使用F12 或者右键检查打开开发者工具
+	5.语法特点:
+		1.标签: <标签名>
+		2.分类:
+			1.双标签:成对出现,有开始和结束标签
+			2.单标签:只有开始没有结束标签
+			3.单标签闭合<标签名/>
+			4.XML 语法严格 文档标签区分大小写并且必须闭合
+		3.标签语法:
+			<标签名 属性名='属性值'>标签内容<标签名>
+			标签属性用来对标签本身做补充说明
+			e.g.:<title charset="utf-8">标签内容</title>
+				<meta charset="utf-8"> #可解决中文识别
+		4.文档会忽略多余的空格,只会显示一个空格
+	6.语法介绍
+		1.所有网页内容都需要放在<html>标签中
+		2.<head>标签中存放网页文档的头部信息
+			用户不可见的
+				编码方式:<meta charset='utf-8'>
+				链接的外部文件,网页关键字等
+			用户可见的
+				浏览器选项卡上的信息
+					网页标题:<title>xxx</title>
+					网页LOGO:<link rel='shortcut icon' href='xxx' type='image/x-icon'>
+		3.HTML大小写不敏感,都可以识别,推荐统一小写
+		4.<!doctype html> HTML5的文档声明方式
+		5.W3C 国际组织,主要是制定和规范HTML,CSS语法
+	7.标签类型
+		1.块级元素 : 
+			1.独占一行,不与其他元素共行
+			2.默认宽度与父元素保持一致
+			3.可以手动设置宽高尺寸
+		代表元素:div,hn,p,ul,ol,dl,li,table,form...
+		
+		2.行内元素 : 
+			1.可以与其他元素共行显示
+			2.宽高由元素的内容决定,不能手动设置宽高
+		代表元素:span,strong,i,a,b,label,sub,sup
+		
+		3.行内块元素
+			既可以共行也可以手动设置宽高
+		代表元素:img,input
+
+3.常用标签
+	1.标题标签<hn></hn>
+		常用的标题标签 默认加粗
+		n取值1-6 字体大小逐级递减
+	2.段落标签<p></p>
+	3.文本标签
+		<span></span>
+		<label></label>
+		<i></i> #设置斜体
+		<b></b> <strong></strong> #设置粗体
+		<u></u> #设置下划线
+		<s></s> <del></del> #设置删除线
+		<sub>x</sub> # x设置为下标 
+		<sup>x</sup> # x设置为上标
+		文本属性:
+			align 设置文本对齐方式
+				left(默认)/center/right
+	4.格式标签
+		<br/> #换行
+		<hr/> #水平线
+		字符实体:
+			&nbsp(空格); &yen(￥); &copy(©); &lt(<); &gt(>);
+	5.列表标签
+		1.无序列表
+			设置type属性修改项目符号
+				disc(默认)	实心圆点
+				square		实心小方块
+				circle		空心圆点
+				none		取消项目符号
+			<ul type="">
+				<li></li>
+			<ul>
+		2.有序列表
+			设置type属性修改项目符号
+				1(默认)
+				a
+				A
+				i 		小写罗马数字
+				I 		大写罗马数字
+			设置start属性,决定从几开始排序,取值为数字
+			<ol type="" start="">
+				<li></li>
+			</ol>
+		3.定义列表
+			dt表示对数据分组
+			dd表示具体数据
+			<dl>
+				<dt></dt>
+					<dd></dd>
+					<dd></dd>					
+			</dl>
+	6.图片标签
+		<img src="URL" title="" alt="">
+		URL 组成: 协议+域名+目录路径+文件名
+		路径分为相对路径和绝对路径
+		1.绝对路径:从根目录开始查找
+			注意:1.斜杠方向的问题
+				2.目录与文件名称不能缺失
+				3.'file:///'协议是Windows上打开本地文件的协议,类似文件管理器
+		2.相对路径:从当前文件所在的目录位置开始查找
+			"../"表示当前文件夹返回上一级目录
+		title属性:鼠标悬停在图片时出现的提示文本
+		alt属性:设置图片加载失败后的提示信息
+	7.超链接标签
+		使用超链接标签 <a href="URL" target="">超链接名称</a>
+		1.指定网络URL进行跳转,一定要写协议
+		2.设置新网页的打开方式,是否在当前选项卡窗口打开
+			target=""  默认值为_self  在当前窗口打开,覆盖当前文件
+					   _blank  表示新建窗口打开
+		3.href 属性为空,表示链接到当前页面,会进行页面刷新
+		4.href 属性为'#',表示链接到当前页面,但不会进行页面刷新
+		5.文档内部锚点链接:在当前页面设置锚点链接,跳转到当前文档的指定位置
+			1.在指定位置添加空的超链接标签,并设置name/id 属性
+				<a name/id="anchor"></a>
+			2.在超链接中设置href="#锚点值"(#表示当前页面,锚点值就是name/id 属性)
+				<a href="#anchor">锚点名</a>
+	8.常用属性:
+		href:一般建立与外部资源文件的连接,即时引入失败也不会影响当前文档的正常显示
+		src:表示将资源插入在文档中,作为文档的内容部分显示,如果插入失败会影响文档的正常显示 
+4.表格
+	<table>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	1.table 的属性
+		width
+		height
+		border	边框属性,默认以像素为单位
+		bgcolor	背景颜色:
+				1.单词
+				2.十六进制
+					#开头 + 六位数字
+					数字每两位为一组代表三原色中的一个
+					第一组为红色,第二组为绿色,第三组为蓝色
+		align 	设置表格在窗口中的水平方向的显示方式:left/center/right
+		cellspacing 设置表格单元格与表格边框以及单元格之间的距离
+		cellpadding 设置单元格内容框与单元格边框的上下左右四个方向的距离
+	2.tr/td 可用的属性
+		width
+		height
+		bgcolor
+		align	设置单元格内容的水平对齐方式
+		valign 	设置垂直方向对齐方式:top/middle/bottom
+	3.td 独有的属性
+		rowspan 设置单元格跨行合并,取值为数字
+		colspan 设置单元格跨列合并,取值为数字
+	4.表格结构
+	<table>
+		<!-- 表格头部 可以将若干行归位一组作为表格的头部信息 -->
+		<thead>
+			<tr>
+				<td>表格头部信息</td>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- 表格的主体信息,由行和单元格组成 -->
+			<tr>
+				<td>表格主体</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>表格尾部</td>
+			</tr>			
+		</tfoot>
+	</table>
+		thead tbody tfoot 可以省略,如果不写,表格中的所有内容会自动加入tbody中
+		thead tfoot 用来将一行或是若干行分组作为表格的头部和尾部信息
+	5.表格的标题及首行文本特殊样式
+		<table>
+			<caption>表格标题</caption>
+			<tr>
+				<th></th>
+			</tr>
+		</table>
+		<caption>:用于设置表格标题,必须作为表格第一个子元素使用
+		<th>用法同<td>,并自带文本居中和加粗效果
+
+5.表单
+	1.作用:向服务器发送数据
+	2.基本语法
+		<form action="数据目的地" method="发送方式">
+
+		</form>
+
+		属性:
+			action 指定表单数据提交到服务器中的哪个文件,属性值为文件路径
+			method 指定数据提交的方式 常用的:get/post
+				注意:
+					get 请求:数据会被拼接在URL后面直接发送(明文传输)
+						1.安全性较低
+						2.数据大小受限,最大为2k
+						3.默认的提交方式
+					post 请求:数据会被打包单独发送
+						1.隐式提交给服务器,安全性高
+						2.数据大小不受限制
+	3.表单控件(重点)
+		1.文本输入框和密码框
+		<input type="" name="" placeholder="">
+			type:指定控件类型
+				text 		文本输入框
+				password 	密码框
+			name:给当前控件取名,缺少的话无法提交
+			placeholder:设置用户输入前的提示文本
+		2.单选和复选框
+		<input type="" name="" value="" checked/>
+			type:
+				radio		单选框
+				checkbox	复选框
+			name:用来定义控件名称并且分组,一组按钮的name属性必须一致
+			value:用来设置控件的值,用于发送给服务器
+			checked:设置按钮为默认选中状态
+		3.隐藏域:隐式发送一些附加信息,用户不可见
+			<input type="hidden" name="userid" value="101"/>
+			<input type="hidden" name="other" value="用户隐私"/>
+		4.文件上传
+			<input type="file" name="userimg"/>
+		5.文本域
+			<textarea name="userinfo" cols="20" rows="5"></textarea>
+			clos:指定文本域默认显示的列数,一行能够显示的英文字符量,中文减半
+			rows:指定文本域默认显示的行数
+		
+		*disabled:可用于所有表单控件,作用为禁用表单控件
+
+		6.下拉菜单
+			<select name="area">
+				<option value="BJ">北京</option>
+				<option value="SH">上海</option>
+				<option value="SZ">深圳</option>
+			</select>
+			下拉菜单分组
+			<select name="address">
+				<optgroup label="广东省">
+					<option value="GZ">广州</option>
+					<option value="SZ">深圳</option>
+					<option value="ZS">中山</option>
+				<optgroup label="河北省">
+					<option value="SJZ">石家庄</option>
+					<option value="BD">保定</option>
+				</optgroup>
+			</select>
+			value:最终发送给服务器的数据
+			optgroup:用来对选项分组,通过label属性设置组名
+			option:设置具体的选项
+		7.提交/重置/普通 按钮
+			1.提交按钮<input type="submit">
+				将表单数据发送给服务器
+			2.重置按钮<input type="reset">
+				重置当前表单数据到初始状态
+			3.普通按钮<input type="button" value="按钮名">
+			4.普通按钮<button type="">按钮名</button>
+				type:submit(效果同1)/reset(效果同2)/button(效果同3)
+				需要添加标签文本显示在按钮上
+		8.label for ID
+			<input type="radio" value="male" id="male">
+			<label for="male">男</label>
+			使用label标签显示文本,将label的标签属性for的属性值设置为将要绑定的表单控件id值,实现点击文本跟点击控件一样的效果
+			maxlength:设定输入框可输入的最大字符数
+
+		9.取色板
+		<input type="color" name="colorpick">
+		
+6.容器标签 - 块级元素
+	<div></div>:常用于页面的模块划分
+	类似:<span></span>(行内元素)用于行内分区

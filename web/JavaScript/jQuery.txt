@@ -1,0 +1,290 @@
+jQuery
+1.jQuery是一个轻量级的JS库-是一个被封装好的JS文件,提供了更为简便的元素操作方式
+	核心理念:Write Less Do More
+	jQuery版本:
+		jQuery2.x 			不再支持IE6.7.8
+		jQuery1.11.x
+2.使用jQuery
+	1.引入jQuery文件
+		<script src="jquery-1.11.3.js"></script>
+		注意:jQuery文件的引入操作必须要放在其他jQuery操作之前
+3.jQuery对象
+	1.什么是jQuery对象
+		jQuery对象是由jQuery对页面元素进行封装后的一种体现,为数组
+		jQuery中提供的所有操作都只针对jQuery对象,DOM对象不可用
+	2.工厂函数-$()
+		作用:
+			1.能够获取jQuery对象
+			2.能够将DOM对象转换为jQuery对象
+		语法:
+			$(选择器/DOM对象);
+				$()能够将选择器和DOM对象封装成jQuery对象进行返回
+	3.DOM对象和jQuery对象之间的转换
+		DOM对象:只能使用DOM提供的操作,不能使用jQuery操作
+		jQuery对象:只能使用jQuery操作,不能使用DOM操作
+		1.将DOM对象转换为jQuery对象
+			语法:
+				var 变量 = $(DOM对象);
+
+				注意:所有的jQuery对象在起名的时候,最好用$开头,用于区分DOM对象
+		2.将jQuery对象转换为DOM对象(少用)
+			1.var dom对象 = jQuery对象.get(0);
+			2.var dom对象 = jQuery对象[0];
+4.jQuery选择器
+	1.作用
+		获取页面上的元素们,返回值都是由jQuery对象组成的数组
+		语法:$("选择器");
+	2.选择器详解
+		1.基本选择器(略)
+		2.层级选择器
+			1.$("selector1+selector2")
+				名称:相邻兄弟选择器
+				作用:匹配紧紧跟在selector1后面且满足selector2选择器的元素
+			2.$("selector1~selector2")
+				名称:通用兄弟选择器
+				作用:匹配selector1后面所有满足selector2选择器的元素
+		3.基本过滤选择器
+			1.:first
+				只匹配到第一个元素
+			2.:last
+				只匹配到最后一个元素
+			3.:not(selector)
+				将满足selector选择器的元素排除出去
+			4.:odd
+				匹配偶数行元素(匹配奇数下标)
+			5.:even
+				匹配奇数行元素
+			6.:eq(index)
+				匹配下标等于index的元素
+			7.:gt(index)
+				匹配下标大于index的元素
+			8.:lt(index)
+				匹配下标小于index的元素
+		4.属性选择器
+			1.[attribute]
+				作用:匹配包含指定属性的元素
+				e.g.:$("div[id]");
+			2.[attribute=value]
+				作用:匹配属性值为value的元素
+				e.g.:$("div[id=main]");等同于$("#main");
+			3.[attribute!=value]
+				作用:匹配属性值不为value的所有元素
+			4.[attribute^=value]
+				作用:匹配属性值以value字符作为开始的所有元素
+			5.[attribute$=value]
+				作用:匹配属性值以value字符作为结尾的所有元素
+			6.[attribute*=value]
+				作用:匹配属性值中包含value字符的元素
+		5.子元素过滤选择器
+			1.:first-child
+				匹配属于其父元素中的首个子元素
+			2.:last-child
+				匹配属于其父元素中的最后一个子元素
+			3.:nth-child(n)
+				匹配属于其父元素中的第n个子元素
+5.jQuery操作DOM
+	1.基本操作
+		1.html()
+			作用:获取或设置jQuery对象的HTML内容
+				等同于innerHTML
+			e.g.:
+				var $div = $("#main");
+				console.log($div.html());
+				$div.html("动态设置的文本");
+		2.text()
+			作用:纯文本内容
+				等同于innerText
+		3.val()
+			作用:获取或设置表单控件的value值
+				等同于value
+	2.属性操作
+		1.attr()
+			作用:读取或设置jQuery对象的属性值
+			e.g.:
+				1.$obj.attr("id");
+					获取$obj对象的id属性值
+				2.$boj.attr("id","container")
+					设置$obj对象的id属性值为container
+		2.removeAttr("attrName")
+			作用:删除jquery对象的attrName属性
+			e.g.:
+				$obj.removeAttr("class");
+	3.样式操作
+		1.attr("class","className")
+			使用attr()动态绑定className值到jq对象的class属性上
+		2.addClass("className")
+			作用:追加className选择器到jq对象的class属性后
+			返回值:jq对象
+			e.g.:
+			<div id="obj"></div>
+			var $obj=$("#obj");
+				$obj = $obj.addClass("c1");
+				结果:<div id="obj" class="c1"></div>
+				$obj = $obj.addClass("c2");
+				结果:<div id="obj" class="c1 c2"></div>
+			以上两个操作可以简化为:
+				$obj.addClass("c1").addClass("c2");
+		*返回值为对象本身时可以使用连缀调用
+		3.removeClass("className")
+			作用:将className属性值从class属性中移除
+		4.removeClass()
+			作用:清空class属性值
+		5.toggleClass("className")
+			切换样式:
+				元素若有className属性值,则删除
+				元素若无className属性值,则添加
+		6.css("css属性名")
+			作用:获取对应css属性的值
+			e.g.:
+				$obj.css("id")
+				作用:获取$obj对象的id属性值
+		7.css("css属性名","css属性值")
+			作用:为元素设置css属性值
+				等同于内联
+		8.css(JSON对象)
+			JSON对象类似于Python中字典的写法
+			e.g.:
+			$obj.css({
+				"css属性名1":"css属性值1",
+				"css属性名2":"css属性值2",
+				...
+			});
+	4.遍历节点
+		1.children()/children(selector)
+			作用:获取jq对象的所有子元素或带有指定选择器的子元素
+			注意:只考虑子代元素,不考虑后代元素
+		2.next()/next(selector)
+			作用:获取jq对象的下一个兄弟元素或满足selector的下一个兄弟元素
+		3.prev()/prev(selector)
+			作用:获取jq对象的上一个兄弟元素或满足selector的上一个兄弟元素
+		4.siblings()/siblings(selector)
+			作用:获取jq对象的所有兄弟节点或满足selector的所有兄弟节点
+		5.find(selector)
+			作用:获取满足selector选择器的所有后代元素
+		6.parent()
+			作用:查找jq对象的父元素
+	5.创建元素 & 插入元素
+		1.创建元素
+			语法:var $obj = $("创建的内容");
+			注意:创建的内容必须是标记
+			e.g.:
+				1.创建一对div
+					var $div = $("<div id='xxx'>xxxx</div>");
+				2.创建一对button
+					var $btn = $("<button></button>");
+					$btn.attr("id","btnDelete");
+					$btn.html("删除");
+		2.插入元素
+			1.内部插入
+				1.$obj.append($new);
+					将$new元素追加到$obj中最后一个子元素的位置
+				2.$obj.prepend($new);
+					将$new元素插入到$obj中第一个子元素的位置
+			2.外部插入(作为兄弟元素插入到网页中)
+				1.$obj.after($new);
+					将$new作为$obj的下一个兄弟节点插入到网页中
+				2.$obj.before($new);
+					将$new作为$obj的上一个兄弟节点插入到网页中
+	6.删除元素
+		1.remove()
+			语法:$obj.remove();
+			作用:删除$obj元素
+		2.remove("selecor")
+			语法:$obj.remove("selector");
+			作用:将满足selector选择器的元素删除
+		3.empty()
+			语法:$obj.empty();
+			作用:清空$obj内容
+
+6.jQuery中的事件处理
+	1.DOM加载完成后的操作
+		1.$(document).ready(function(){
+			//DOM树加载完成后就要执行的操作
+			//相当于页面的初始化(取代window.onload())
+		});
+		2.$().ready(function(){
+			//DOM树加载完成后就要执行的操作
+			//效果同上
+		});
+		3.$( function(){
+			//效果同上
+		} );
+	2.jQuery事件绑定
+		1.方式1
+			$obj.bind("事件名称",事件处理函数);
+			e.g.:
+				$obj.bind("click",function(){
+					要执行的操作
+				});
+		2.方式2
+			$obj.事件名称(function(){
+
+			});
+			e.g.:$obj.click(function(){
+
+			});
+		常用事件
+			$obj.click(fn);
+			$obj.mouseover(fn);
+			$obj.mousemove(fn);
+			$obj.mouseout(fn);
+			$obj.keydown(fn);
+			$obj.keypress(fn);
+			$obj.focus(fn);
+			$obj.blur(fn);
+			$obj.change(fn);
+			$obj.submit(fn);
+	3.事件中的this
+		在jQuery事件中,this表示的是触发当前事件的DOM对象
+	4.事件对象-event
+		在绑定事件的时候,允许传递event参数来表示事件对象
+			1.$obj.bind("事件名称",function(event){
+				event表示的就是事件对象
+			});
+			2.$obj.事件名称(function(event){
+				event表示的就是事件对象
+			});
+		event的使用方式与原生JS事件中的事件对象一致
+			1.事件源
+				event.target
+			2.鼠标事件
+				event.offsetX:在元素上的横坐标
+				event.offsetY:在元素上的纵坐标
+			3.键盘事件
+				event.which:键位码或ASCII码
+	5.激发事件操作
+		$obj.事件名称();
+		e.g.:
+			$obj.click();//触发$obj的click事件
+			$obj.click(function(){});//为$obj绑定click事件
+
+7.jQuery遍历操作
+	方法:each()
+	1.循环遍历 jQuery数组
+		$obj.each(function(i,obj){
+			//i:循环出来的元素的下标
+			//obj:循环出来的元素(DOM元素)
+		});
+
+	2.循环遍历 JS数组(原生)
+		1.将原生数组通过工厂函数转换为jQuery数组
+		2.$.each(原生数组,function(i,obj){
+			//i:遍历出来的下标
+			//obj:遍历出来的元素
+		});
+		
+8.jQuery动画
+	1.基本显示/隐藏
+		$obj.show()/$obj.show(执行时长);
+		$obj.hide()/$obj.hide(执行时长);
+	2.滑动式显示/隐藏
+		$obj.slideDown()/$obj.slideDown(执行时长);
+		$obj.slideUp()/$obj.slideUp(执行时长);
+	3.淡入淡出式显示/隐藏
+		$obj.fadeIn()/$obj.fadeIn(执行时长);
+		$obj.fadeOut()/$obj.fadeOut(执行时长);
+
+9.jQuery插件
+	1.下载插件并引入(jQuery,插件文件,css文件)
+	2.结合当前网页修改css
+	3.在插件中修改数据(替换图片/图片名称)

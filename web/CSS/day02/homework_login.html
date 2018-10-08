@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		#wjmm{
+			font-size: 12px;
+			
+		}
+		#wjmm a{
+			color: gray;
+		}
+		#jzmm{
+			font-size: 14px;
+		}
+		#login{
+			width: 150px;
+			height: 30px;
+			background-color: olivedrab;
+			border:1px solid olivedrab;
+			border-radius:10%;
+			font-size: 20px;
+			color: white;
+			line-height: 30px;
+		}
+		#zchy{
+			width: 150px;
+			height: 30px;
+			background-color: white;
+			border:1px solid olivedrab;
+			border-radius:10%;
+			font-size: 20px;
+			color: olivedrab;
+		}
+		td{
+			width: 100px;
+			height: 50px;
+
+		}
+	</style>
+</head>
+<body>
+	<form action="xxx.php" method="get">
+		<table>
+			<tr>
+				<td align="center">手机号</td>
+				<td colspan="2" >
+					<input type="text" name="phone_num" width="450px">
+				</td>
+			</tr>
+			<tr>
+				<td align="center">密码</td>
+				<td colspan="2">
+					<input type="password" name="passwd" placeholder="请输入6-20位号码字符" width="450px" >
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="checkbox" name="mark" id="mark" checked>
+					<label for="mark" id="jzmm">记住密码</label>
+				</td>
+				<td id="wjmm">
+					<a href="#">忘记密码?</a>
+					<a href="#"> 快捷登录</a>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<button type="submit" id="login">登录</button>
+				</td>
+				<td>
+					<button type="button" id="zchy">注册会员</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

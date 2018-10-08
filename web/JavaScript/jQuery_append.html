@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		td{
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="gName" placeholder="商品名称">
+	<input type="text" id="gPrice" placeholder="商品价格">
+	<input type="text" id="count" placeholder="购买数量">
+	<button id="buy">购买</button>
+	<table border="1px" width="600px">
+		<thead>
+			<tr>
+				<td>商品名称</td>
+				<td>商品价格</td>
+				<td>购买数量</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody id="show">
+			
+		</tbody>
+	</table>
+
+	<script type="text/javascript" src="jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#buy").click(function(){
+				var $gName = $("<td>"+$('#gName').val()+"</td>");
+				var $gPrice = $("<td>"+$('#gPrice').val()+"</td>");
+				var $count = $("<td>"+$('#count').val()+"</td>");
+
+				var $btnChange = $("<button>修改</button>");
+				var $btnDelete = $("<button>删除</button>");
+				$btnDelete.click(function(){
+					$tr.remove();
+				});
+
+				$btnChange.click(function(){
+					var $count = $(this).parent().prev();
+					if ($(this).html()=='修改') {
+						$(this).html('确认');
+						var $btnReduce = $("<button>-</button>");
+						$btnReduce.click(function(){
+							if ($txtCount.val()>1) {
+								$txtCount.val($txtCount.val()-1);
+							}
+						});
+						var $txtCount = $("<input type='text'>");
+						$txtCount.val($count.text());
+						var $btnAdd = $("<button>+</button>");
+						$btnAdd.click(function(){
+							$txtCount.val(Number($txtCount.val())+1);
+						});
+						$count.empty();
+						$count.append($btnReduce).append($txtCount).append($btnAdd);	
+					}else{
+						$(this).html('修改');
+						var value = $count.children("input").val();
+						$count.html(value);
+					}
+				});
+
+				var $oper = $("<td></td>");
+				$oper.append($btnChange).append($btnDelete);
+
+				var $tr = $("<tr></tr>");
+				$tr.append($gName).append($gPrice).append($count).append($oper);
+
+				$("#show").append($tr);
+			});
+		});
+
+
+	</script>
+</body>
+</html>

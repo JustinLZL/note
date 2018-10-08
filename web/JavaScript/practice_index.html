@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		function Email(){
+			var input=prompt('enter e-mail:');
+			var ret1=input.indexOf('@');
+			var ret2=input.lastIndexOf('.');
+			var uname=input.substring(0,ret1);
+			var server=input.substring(ret1+1,ret2);
+			console.log('uname:'+uname);
+			console.log('server:'+server);
+		}
+
+		function Birthday(){
+			var input=prompt('enter ID-card-Number:');
+			var year=input.substring(6,10);
+			var month=input.substring(10,12);
+			var day=input.substring(12,14);
+			console.log(year+'年'+month+'月'+day+'日');
+		}
+		function shopping(){
+			var str='1001_5&1002_4&1053_1';
+			var ret=str.split('&');
+
+			for (var i = 0; i < ret.length; i++) {
+				console.log('stuff:'+ret[i].split('_')[0]);
+				console.log('num:'+ret[i].split('_')[1]);
+			}
+		}
+
+		function testReplace(){
+			var str="Microsoft is a big company,Microsoft's color is red and has MICROSOFT logo like Microsoft";
+			var reg=/Microsoft/ig;
+			var ret1 = str.replace(reg,'微软');
+			var ret2 = str.match(reg)
+
+			console.log(ret1);
+			console.log(ret2.length);
+		}
+	</script>
+	<button onclick="Email()">Email</button>
+	<button onclick="Birthday()">Birthday</button>
+	<button onclick="shopping()">Shopping</button>
+	<button onclick="testReplace()">testReplace</button>
+</body>
+</html>

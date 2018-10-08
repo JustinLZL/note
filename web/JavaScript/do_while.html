@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+<!-- 	<script type="text/javascript">
+		do{
+			var input = prompt('enter:');
+			console.log(input);
+		}while(input != 'exit');
+	</script> -->
+	<script type="text/javascript">
+		var year = prompt('enter:year');
+		var month = Number(prompt('enter:month'));
+		var day = Number(prompt('enter:day'));
+
+		var isRun = year%4==0&&year%100!=0||year%400==0; 
+		var totalDays = 0;
+		var i = 0;
+		while(i<month){
+			if (i==1||i==3||i==5||i==7||i==8||i==10||i==12) {
+				totalDays+=31;
+			}else if(i==4||i==6||i==9||i==11){
+				totalDays+=30;
+			}else if (i==2) {
+				totalDays += 28;
+			}
+			i++;
+		}
+		totalDays += isRun;
+		totalDays += day;
+		console.log(totalDays);		
+	</script>
+</body>
+</html>

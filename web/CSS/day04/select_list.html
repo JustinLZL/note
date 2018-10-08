@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		/*1.页面基础样式*/
+		body,ul,ol{
+			margin: 0;
+			padding: 0;
+		}
+		ul,ol{
+			list-style: none;
+		}
+		a{
+			text-decoration: none;
+		}
+		/*2.设置导航栏样式*/
+		#nav{
+			width: 590px;
+			height: 50px;
+			background: pink;
+			margin: 0 auto;
+		}
+		#nav>ul>li{
+			float: left;
+			width: 190px;
+			height: 50px;
+			text-align: center;
+			line-height: 50px;
+			margin-right: 10px;
+
+		}
+		#nav .last{
+			margin-right: 0;
+		}
+		.city:hover .address{
+			display: block;
+		}
+		.address{
+			display: none;
+		}
+		#banner{
+			width: 590px;
+			margin: 5px auto;
+		}
+		/*下拉箭头设置*/
+		u{
+			/*与文本共行*/
+			display: inline-block;
+			width: 0;
+			height: 0;
+			/*简化下列
+			border-top: 6px solid black;
+			border-right: 6px solid transparent;
+			border-bottom: 6px solid transparent;
+			border-left: 6px solid transparent;*/
+			border: 6px solid transparent;
+			border-top: 6px solid black;
+			position: relative;
+			top: 4px;
+		}
+	</style>
+</head>
+<body>
+	<!-- 下拉菜单的制作 -->
+	<div id="nav">
+		<ul>
+			<li class="city">
+				<a href="#">city</a>
+				<u></u>
+				<ol class="address">
+						<li>北京</li>
+						<li>上海</li>
+						<li>广州</li>
+				</ol>
+			</li>
+			<li><a href="#">新闻</a></li>
+			<li class="last"><a href="#">音乐</a></li>
+		</ul>
+	</div>
+	<div id="banner">
+		<!-- <img src="images/1.jpg"> -->
+	</div>
+</body>
+</html>

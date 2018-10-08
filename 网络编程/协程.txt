@@ -1,0 +1,70 @@
+﻿协程
+定义:纤程,微线程.本质上只是一个线程在运行.
+
+功能特点:通过应用层程序,记录上下文栈区,实现在程序执行过程中的跳跃执行.由此可以选择不阻塞的部分执行以提升运行效率.
+
+优点:1.资源消耗少
+	2.无需多线程那样进行多核之间的切换
+	3.无需同步互斥操作
+	4.IO并发性好(好到难以想象)
+
+	进程+协程
+
+缺点:无法利用计算机的多核资源
+
+yield是python实现协程的基本手段
+
+第三方协程模块:
+	greenlet  gevent  evenless  stackless
+
+模块的安装
+sudo pip3 install greenlet/gevent
+
+greenlet
+	gr = greenlet.greenlet()
+	gr.switch()
+
+gevent 模块
+
+*将协程事件封装为函数
+*通过gevent将函数生成对应的协程对象
+*通过协程对象完成协程功能的实现
+
+gevent.spawn(func,argv)
+功能:将事件变为协程事件并启动
+参数:func:传入一个函数变为协程
+     argv:给func位置传参
+返回值:协程对象
+
+gevent.joinall([g1,g2,g3,...])
+功能:阻塞回收协程
+参数:列表内为要回收的协程对象
+
+gevent.sleep(n)
+功能:可以模拟IO阻塞的情况
+
+
+from gevent import monkey
+
+monkey.patch_all()
+功能:修改socket的阻塞行为
+*必须在导入socket之前调用
+
+
+PDB调试方法:通过pdb模块完成调试功能
+功能:断点设置,单步执行,查看函数,查看代码段,追踪变量值
+
+常用命令:
+	break,b		设置断点,暂停程序的执行
+	continue,c	继续执行,至下一个断点
+	list,l		查看当前代码段
+	step,s 		进入函数内部,查看函数内部如何执行
+	next,n 		执行下一行
+	pp 变量名 	打印变量
+	help 		获取帮助
+
+pdb.set_trace()
+功能:设置调试初始点,开始PDB调试
+
+使用pdb模式运行,从第一行进入pdb调试
+python3 -m pdb xxx.py

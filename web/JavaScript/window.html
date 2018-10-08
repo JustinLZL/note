@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<button onclick="testConfirm()">confirm</button>
+
+	<button onclick="testTime()">time</button>
+	<button onclick="testPause()">pause</button>
+	<button onclick="closePage()">timerClose</button>
+
+	<button onclick="goToBaidu()">跳转百度</button>
+
+	<script type="text/javascript">
+		function testConfirm(){
+			var ret = confirm("确定关闭网页?");
+			if (ret == true) {
+				close();
+			}
+		}
+
+		var timer;
+		function testTime(){
+			timer = setInterval(function(){
+				var now = new Date();
+				console.log(now.toLocaleString());
+			},1000)		
+		}
+
+		function testPause(){
+			clearInterval(timer);
+		}
+
+		function closePage(){
+			if (confirm("确定关闭网页?")) {
+				setTimeout(function(){
+					close();
+				},5000);
+			}
+		}
+
+		function goToBaidu(){
+			location.href="http://www.baidu.com";
+		}
+
+	</script>
+</body>
+</html>

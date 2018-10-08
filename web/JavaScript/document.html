@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<a href="#" id="click1">click</a>
+	<button onclick="getA()">得到a</button>
+	<button onclick="getAHTML()">获取a的html内容</button>
+	<button onclick="getText()">获取a的普通文本内容</button>
+	<button onclick="getAText()">操作innerText</button>
+	<script type="text/javascript">
+		function getA(){
+			var elem = document.getElementById("click1");
+			elem.innerHTML = "<h1>Google</h1>";
+			console.log(elem.innerHTML);
+		}
+
+		function getAHTML(){
+			var elem = document.getElementById("click1");
+			console.log(elem.innerHTML);
+		}
+
+		function getText(){
+			var elem = document.getElementById("click1");
+			console.log(elem.innerText);
+		}
+		function getAText(){
+			var elem = document.getElementById("click1");
+			elem.innerText = "<h1>Google</h1>";
+		}
+	</script>
+</body>
+</html>

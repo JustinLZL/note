@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		div{
+			width: 200px;
+			height: 200px;
+		}
+		#red{
+			background: red;
+			float: right;
+		}
+		#green{
+			background: green;
+			/*清除浮动带来的影响*/
+			/*正常元素的左边不许出现浮动元素*/
+			clear: both;
+		}
+	</style>
+</head>
+<body>
+	<div id="red"></div>
+	<div id="green"></div>
+
+</body>
+</html>

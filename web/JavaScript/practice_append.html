@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		table{
+			margin-top: 50px;
+			border:1px solid black;
+		}
+		td{
+			border:1px solid black;
+			width: 300px;
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<input type="text" id="pName" placeholder="商品名称">
+		<input type="text" id="pPrice" placeholder="商品价格">
+		<input type="text" id="pNum" placeholder="购买数量">
+
+		<button onclick="buy()">购买</button>
+	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<td>商品名称</td>
+				<td>商品价格</td>
+				<td>购买数量</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody id="detail"></tbody>	
+	</table>
+
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript">
+
+		function buy(){
+			//创建两个按钮
+			var btnUpdate = document.createElement("button");
+			btnUpdate.innerHTML="修改";
+			btnUpdate.onclick=function(){
+				//获取购买数量的td备用
+				var tdCount = this.parentNode.previousElementSibling;
+				if (this.innerHTML=="修改") {
+					this.innerHTML="确定";
+					//要执行修改的操作
+					//创建一个按钮:-
+					var btnReduce = document.createElement("button");
+					btnReduce.innerHTML="-";	
+					//创建一个文本框:tdCount.innerHTML
+					var txtCount = document.createElement("input");
+					txtCount.type = "text";
+					txtCount.value = tdCount.innerHTML;
+					//创建一个按钮:+
+					var btnAdd = document.createElement("button");
+					btnAdd.innerHTML="+";
+					tdNum.innerHTML="";
+					tdNum.appendChild(btnReduce);
+					tdNum.appendChild(txtCount);
+					tdNum.appendChild(btnAdd);
+					btnReduce.onclick=function(){
+						if (txtCount.value>1) {
+							--txtCount.value;
+						}
+					}
+					btnAdd.onclick=function(){
+						++txtCount.value;
+					}
+				}else{
+					this.innerHTML="修改";
+					var txtCount = tdCount.children[1];
+					tdNum.innerHTML = txtCount.value;
+				}
+			}
+
+			var btnDelete = document.createElement("button");
+			btnDelete.innerHTML="删除";
+			btnDelete.onclick=function(){
+				$("detail").removeChild(this.parentNode.parentNode);
+			}
+
+			//创建4个td
+			var pName = $("pName").value;
+			var pPrice = $("pPrice").value;
+			var pNum = Number($("pNum").value);
+			var tdName = document.createElement("td");
+			tdName.innerHTML=pName;
+			var tdPrice = document.createElement("td");
+			tdPrice.innerHTML=pPrice;
+			var tdNum = document.createElement("td");
+			tdNum.innerHTML=pNum;
+			var tdOper = document.createElement("td");
+			tdOper.appendChild(btnUpdate);
+			tdOper.appendChild(btnDelete);
+
+			//创建tr
+			var tr = document.createElement("tr");
+			var arr = [tdName,tdPrice,tdNum,tdOper];
+			for (var i = 0; i < arr.length; i++) {
+				tr.appendChild(arr[i]);
+			}
+
+			//添加到detail中
+			$("detail").appendChild(tr);
+		}
+
+
+	</script>
+
+</body>
+</html>

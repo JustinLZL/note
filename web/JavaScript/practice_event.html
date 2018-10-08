@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<form action="#" method="get">
+		<p>
+			用户名称:
+			<input type="text" id="uname">
+			<span></span>
+		</p>
+		<p>
+			用户密码:
+			<input type="password" id="pwd">
+			<span></span>
+		</p>
+		<p>
+			确认密码:
+			<input type="password" id="pwd2">
+			<span></span>
+		</p>
+		<p>
+			<button type="submit" id="upload">提交</button>
+		</p>
+	</form>
+	<script type="text/javascript" src="jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		function checkUname(){
+			var len = $("#uname").val().length;
+			if (len>=6&&len<=18) {
+				$("#uname").next().html("通过");
+				return true;
+			}else{
+				$("#uname").next().html("必须是6-18位");
+				return false;
+			}
+		};
+
+		function checkpwd(){
+			var len = $("#pwd").val().length;
+			if (len>=6) {
+				$("#pwd").next().html("通过");
+				return true;
+			}else{
+				$("#pwd").next().html("必须是6位以上");
+				return false;
+			}
+		};
+
+		function checkpwd2(){
+			if ($("#pwd").val()==$("#pwd2").val()) {
+				$("#pwd2").next().html("通过");
+				return true;
+			}else{
+				$("#pwd2").next().html("必须和密码一致");
+				return false;
+			}
+		};
+
+		$(function(){
+			$("#uname").blur(checkUname);
+			$("#pwd").blur(checkpwd);
+			$("#pwd2").blur(checkpwd2);
+			//为form绑定submit事件
+			$("form").submit(function(){
+				return checkUname() && checkpwd() && checkpwd2();
+			});
+			
+		});
+
+
+	</script>
+</body>
+</html>

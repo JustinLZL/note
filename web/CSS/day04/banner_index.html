@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		#banner{
+			width: 800px;
+			margin: 0 auto;
+			position: relative;
+		}
+		#banner img{
+			width: 800px;
+			height: 300px;
+		}
+		/*列表取消默认样式*/
+		ul{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			/*设置绝对定位*/
+			position: absolute;
+			bottom: 10px;
+			right: 20px;
+		}
+		/*li元素共行显示*/
+		li{
+			float: left;
+			width: 30px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			margin: 0 10px;
+			background: darkgray;
+			border-radius: 50%;
+		}
+		.first{
+			background: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="banner">
+		<img src="images/8.jpg">
+		<ul>
+			<li class="first"><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+		</ul>
+	</div>
+</body>
+</html>

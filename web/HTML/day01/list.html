@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>列表标签</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<!-- 1.无序列表 unordered list 
+		默认采用(disc)实心圆点作为项目符号(type)
+		square  实心小方块
+		circle  空心圆
+		none	取消项目符号
+	-->
+	<ul type="none">
+		<!-- 每条数据成为一个列表项 list -->
+		<li>Java</li>
+		<li>C</li>
+		<li>C++</li>
+		<li>Python</li>
+	</ul>
+
+	<!-- 2.有序列表 ordered list 
+		type取值 默认 1
+			i 	小写罗马数字
+			I 	大写罗马数字
+			A 	大写英文字母
+		start 设置项目从第几个开始排序 取值为数字
+	-->
+	<ol type="A" start="3">
+		<li>Java</li>
+		<li>C</li>
+		<li>C++</li>
+		<li>Python</li>
+	</ol>
+
+	<!-- 3.定义列表 define list -->
+	<dl>
+		<dt>订单跟踪</dt>
+			<dd>查看物流</dd>
+			<dd>订单编号</dd>
+			<dd>接通客户</dd>
+	</dl>
+</body>
+</html>

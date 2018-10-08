@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		var input=Number(prompt('enter a number:'))
+		var isPrime=0;
+		for (var i = 2; i < input; i++) {
+			if (input%i==0) {
+				isPrime=1;
+				break;
+			}
+		}
+		if (isPrime==0) {
+			console.log(input+"是素数")
+		}else{
+			console.log(input+"不是素数")
+		}
+	</script>
+<!-- 	<script type="text/javascript">
+		var year=Number(prompt('year:'));
+		var month=Number(prompt('month:'));
+		var day=Number(prompt('day:'));
+		var totalDays=0;
+
+		for (var y=1900;y<year;y++) {
+			totalDays+=365;
+			if (y%4==0&&y%100!=0||y%400==0) {
+				totalDays+=1;
+			}
+		}
+
+		for (var m=1;m<month;m++) {
+			switch (m) {
+				case 1:
+				case 3:
+				case 5:
+				case 7:
+				case 8:
+				case 10:
+					totalDays+=31;
+					break;
+				case 4:
+				case 6:
+				case 9:
+				case 11:
+					totalDays+=30;
+					break;
+				case 2:
+					totalDays+=28;
+					if (year%4==0&&year%100!=0||year%400==0) {
+						totalDays+=1;
+					}
+					break;
+			}
+		}
+
+		totalDays+=day;
+		var i = totalDays%7;
+		if (i==1) {
+			console.log("Monday");
+		}else if (i==2) {
+			console.log("Tuesday");
+		}else if (i==3) {
+			console.log("Wednesday");
+		}else if (i==4) {
+			console.log("Thursday");
+		}else if (i==5) {
+			console.log("Friday");
+		}else if (i==6) {
+			console.log("Saturday");
+		}else if (i==0) {
+			console.log("Sunday");
+		}
+	</script> -->
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		div{
+			width: 200px;
+			height: 200px;
+			background: red;
+			/*在不使用过渡时,属性值的变换是瞬时完成的*/
+			/*1.设置过渡属性*/
+			transition-property: width height background;
+			/*2.设置过渡时长*/
+			transition-duration: 3s;
+			/*3.设置时间曲率函数*/
+			transition-timing-function: ease-in-out;
+			/*4.设置过渡效果延时执行*/
+			/*transition-delay: 1s;*/
+		}
+		div:hover{
+			width: 400px;
+			height: 400px;
+			background: orange;
+			border-radius: 50%
+		}
+/*		img{
+			width: 300px;
+			height: 300px;
+			transition:all 3s ease-out;
+		}
+		img:hover{
+			width: 500px;
+			height: 500px;
+		}*/
+	</style>
+</head>
+<body>
+	<div></div>
+	<!-- <img src="../../HTML/img/happy.gif"> -->
+
+</body>
+</html>

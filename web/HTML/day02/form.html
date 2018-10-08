@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>form</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<!-- 表单元素 -->
+	<form action="xx.php" method="get">
+		<!-- 表单控件 
+			1.文本框与密码框-->
+		<p>
+			用户名:
+			<input type="text" name="user"/>
+		</p>
+		<p>
+			密 &nbsp;&nbsp;码:
+			<input type="password" name="userpwd" placeholder="由6-12位数字字母组成">		
+		</p>
+		<p>
+			用户性别:
+			<input type="radio" name="gender" value="male" id="male">
+			<label for="male">男</label>
+			<input type="radio" name="gender" value="female" id="female">
+			<label for="female">女</label>
+		</p>
+		<p>
+			兴趣爱好:
+			<input type="checkbox" name="hobby" value="singing" />唱歌
+			<input type="checkbox" name="hobby" value="dancing" />跳舞
+			<input type="checkbox" name="hobby" value="drawing" />画画
+			<input type="checkbox" name="hobby" value="basketball" />篮球
+			<input type="checkbox" name="hobby" value="football" />足球
+			<input type="checkbox" name="hobby" value="coding" checked />编程
+		</p>
+		<p>
+			<!-- 隐藏域 
+				用户不可见,用来隐式向服务器发送信息-->
+			<input type="hidden" name="userid" value="101"/>
+		</p>
+		<p>
+			用户头像:
+			<!-- 文件上传 -->
+			<input type="file" name="userimg"/>
+		</p>
+		<p>
+			个人介绍:
+			<!-- 文本域 -->
+			<textarea name="userinfo" cols="20" rows="5" disabled></textarea>		
+		</p>
+		<!-- 下拉菜单 -->
+		<p>
+			所在地区:
+			<select name="area">
+				<option value="BJ">北京</option>
+				<option value="SH">上海</option>
+				<option value="GZ">广州</option>
+				<option value="SZ">深圳</option>
+			</select>
+			<select name="address">
+				<optgroup label="广东省">
+					<option value="GZ">广州</option>
+					<option value="SZ">深圳</option>
+					<option value="ZS">中山</option>
+				<optgroup label="河北省">
+					<option value="SJZ">石家庄</option>
+					<option value="BD">保定</option>
+				</optgroup>
+			</select>
+		</p>
+		<p>
+			<input type="submit" name="submitBtn">
+			<input type="reset" name="resetBtn">
+			<!-- 普通按钮需要通过value属性设置显示文本 -->
+			<input type="button" name="agree" value="同意">
+		</p>
+		<p>
+			<button type="submit">提交</button>
+			<button type="reset">重置</button>
+			<button type="button">点我</button>
+		</p>
+	</form>
+</body>
+</html>

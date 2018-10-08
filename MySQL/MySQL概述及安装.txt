@@ -1,0 +1,103 @@
+﻿mySQL概述
+    数据库:
+        存储数据的仓库
+
+    提供数据库服务的软件:
+    MySQL, Mariadb, SQL_Server, Oracle, DB2, MongoDB...
+
+    生产环境中, 如何选择使用哪个数据库
+        1.是否开源
+            开源软件:
+                MySQL, Mariadb, MongoDB
+            商业软件:
+                Oracle, DB2, SQL_Server
+
+            开源 != 免费
+
+        2.是否跨平台
+            跨平台:
+                MySQL, Mariadb, Oracle, DB2, MongoDB
+            不跨平台:
+                SQL_Server(只用于Windows)
+
+        3.公司类型
+            商业软件:一般都用Oracle
+                政府部门, 金融机构
+            开源软件:
+                游戏网站, 购物网站, 论坛网站...
+
+    MySQL特点:
+        1.关系型数据库
+            关系型数据库的特点:
+                1.数据是以行和列的形式存储(表格)
+                2.表中的每一行叫一条记录
+                3.表中的每一列叫一个字段
+                4.表和表之间的逻辑关联叫关系
+        注意:
+            1.所有数据都是以文件的形式存放在数据库目录(基于硬盘读写)
+                /var/lib/mysql
+            2.关系型数据库的核心内容是关系, 即二维表
+
+            实例:
+                1.关系型数据库存储
+                    表1.学生信息表
+                        姓名    年龄    班级
+                        name1   25     三班 
+                        name2   23     六班
+                    表2.班级信息表 
+                        班级    班主任
+                        三班    name3
+                        六班    name4
+                2.非关系型数据库存储
+                    {'姓名': 'name1', '年龄': 25, '班级': '三班', '班主任': 'name3'}
+                    {'姓名': 'name2', '年龄': 23, '班级': '六班', '班主任': 'name4'}
+
+                    性能比关系型数据库更高, 但是容易造成数据的冗杂
+
+        2.跨平台:
+            可以在Unix, Linux, Windows上运行数据库服务
+
+        3.支持多种编程语言:
+            Python, Java, PHP...
+
+几个概念:
+
+    数据库软件
+        就是一种软件,如:MySQL,MongoDB,可见, 可操作, 用于实现数据库的逻辑功能
+    数据库
+        一种逻辑概念, 用来存放数据的仓库.通过数据库软件来实现, 侧重于存储数据
+    数据仓库(数量级大)
+        主要用于数据挖掘和数据分析
+
+    实例:网购
+	数据库:存放用户名和密码
+	数据仓库:哪个时间段用户登录量最多,哪个用户一年购物最多...
+
+MySQL安装
+    1.Ubantu安装MySQL服务
+        1.安装服务端
+            sudo apt-get install mysql -server
+        2.安装客服端
+            sudo apt-get install mysql -client
+        3.Ubantu安装软件
+            sudo apt-get update
+            sudo apt-get -f install 修复依赖关系
+            sudo apt-get install 软件包
+
+    2.Windows安装MySQL服务
+        1.下载MySQL安装包(官网)
+        2.按教程安装
+
+启动和连接MySQL服务
+    1.服务端启动
+        sudo /etc/init.d/mysql start
+        sudo /etc/init.d/mysql stop
+        sudo /etc/init.d/mysql restart
+        sudo /etc/init.d/mysql status #查看当前数据库状态
+        sudo /etc/init.d/mysql reload #重新加载配置文件
+    2.客户端连接
+        1.命令格式
+            mysql - h主机地址 - u用户名 - p密码
+            mysql - hlocalhost - uroot - p123456
+        2.本地连接可省略 - h 选项
+            mysql - uroot - p123456
