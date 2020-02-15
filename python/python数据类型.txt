@@ -636,3 +636,65 @@ for ch in d:
 
 创建非空的固定集合：
     frozenset(iterable)
+
+字节串 bytes (AKA 字节序列)
+	作用:存储以字节为单位的数据
+	说明:字节串是不可变序列
+	字节是0-255的整数
+    
+创建空字节串的字面值
+	b = b''     
+b绑定空字节串
+	b = b""
+	b = b''''''
+	b = b""""""
+创建非空字节串的字面值
+	b = b'ABCD'
+	b = b'\x41\x42'
+    
+字节串的构造函数bytes
+	bytes()								等同于b''
+	bytes(整型可迭代对象)				用可迭代对象初始化一个字节串
+	bytes(整数n)						生成n个值为0的字节串
+	bytes(字符串, encoding='utf-8')	用字符串的转换编码生成一个字节串
+
+例:
+	b = bytes()
+	b = bytes(range(0, 255))
+	b = bytes(10)
+	b = bytes('你好','utf-8')
+
+bytes 与 str 区别:
+	bytes 存储字节(0-255)
+    str 存储Unicode 字符(0-65535或更大)
+
+str 与 bytes转换
+
+    编码(encode)
+str-------------->bytes
+
+b = s.encode(encoding='utf-8')
+
+      解码(decode)
+bytes-------------->bytesstr
+
+s = b.decode(encoding='utf-8')
+
+
+字节数组 bytearray
+	可变的字节序列
+
+创建函数bytearray
+	bytearray()     创建字节数组
+	bytearray(可迭代对象)
+	bytearray(整数n)
+	bytearray(字符串, encoding='utf-8')
+
+运算:
+	+ += * *=
+	< <= > >= == !=
+	in / not in
+
+字节数组的方法:
+>>>help(bytearray)
+
