@@ -44,11 +44,6 @@ utf8mb4为utf8的超集，支持更多的表情符号
 	The service already exists!
 	The current server installed: D:\mysql-8.0.18-winx64\bin\mysqld MySQL
 
-D:\mysql-8.0.18-winx64\bin>mysql -u root -p
-Enter password: ***********
-ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
-
-
 #启动服务
 net start mysql
 #停止服务
