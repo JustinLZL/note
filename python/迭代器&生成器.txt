@@ -1,0 +1,111 @@
+﻿迭代器 Iterator
+	迭代器是访问可迭代对象的工具(迭代器也是一个对象)
+	迭代器是指用iter(obj) 函数返回对象
+	迭代器可以用next(it) 函数获取可迭代对象的数据
+
+迭代器相关函数
+iter(iterable)  
+   从可迭代对象中返回一个迭代器,iterable 必须是一个能提供一个迭代器的对象
+next(iterator)
+	从迭代器iterator 中获取下一个记录,如果无法获取下一条记录,则触发StopIteration异常通知
+    
+注意:迭代器只能往前取值,不能后退
+
+生成器 Generator
+	生成器是能够动态提供数据的对象,生成器对象也是可迭代对象
+
+    
+
+生成器有两种:
+	1.生成器函数
+	2.生成器表达式
+
+生成器函数定义:
+	含有yield 语句的函数是生成器函数,此函数被调用将返回一个生成器对象
+    
+
+yield 语句:
+	语法:
+		yield 表达式
+	说明:
+		yield 用于def 函数中,目的是将此函数作为生成器函数使用
+     	yield 用来生成数据,供迭代器的next(it) 函数使用
+
+生成器函数说明:
+	1.生成器函数的调用将返回一个生成器对象,生成器对象是可迭代对象
+	2.生成器函数调用 return 会触发一个StopIteration 异常
+
+用生成器函数生成一系列从0开始的整数:
+        
+	def myint(n):
+	    i = 0
+	    while i < n:
+			yield i
+		i += 1
+
+	for x in myint(4):
+	    print(x,end=' ')
+    #0 1 2 3
+
+
+生成器表达式:
+	语法:(表达式 for 变量 in 可迭代对象 if 真值表达式)
+	说明:if 子句可以省略
+	作用:用推导式的形式生成一个新的生成器
+
+		l = [2,3,5,7]
+		lst = [x+1 for x in l]
+		it = iter(lst)
+		print(next(it)) #3
+		l[1] = 30
+		print(next(it)) #4
+
+		l = [2,3,5,7]
+		gen = (x+1 for x in l)
+		it = iter(gen)
+		print(next(it)) #3
+		l[1] = 30
+		print(next(it)) #31
+
+
+迭代工具函数:
+	作用:
+		生成一个个性化的可迭代对象
+
+
+zip(iter1, iter2, iter3,...)    
+	返回一个zip对象,此对象用于生成一个元组,此元组中的元素分别由iter1, iter2, iter3,...中的元组构成(元组个数由最小的可迭代对象决定)
+
+	numbers = [10086,10010,10000,95588]
+	names = ['中国移动','中国联通','中国电信']
+	types = ['a','b','c','d']
+	for i in zip(numbers, names, types):
+		print(i)
+
+	#(10086, '中国移动', 'a')
+	#(10010, '中国联通', 'b')
+	#(10000, '中国电信', 'c')
+
+	for n, a in zip(numbers, names): #等同于序列赋值
+		print(a, '的客服电话是:', n)
+
+	#中国移动 的客服电话是: 10086
+	#中国联通 的客服电话是: 10010
+	#中国电信 的客服电话是: 10000
+
+enumerate(iterable, start=0)
+	生成带索引的枚举对象,返回的迭代类型为索引-值对(index-value),默认索引从零开始,也可以用start指定
+
+	for i in enumerate(names):
+	    print(i)
+
+	#(0, '中国移动')
+	#(1, '中国联通')
+	#(2, '中国电信')
+
+	for i in enumerate(names, 100):
+	    print(i)
+
+	#(100, '中国移动')
+	#(101, '中国联通')
+	#(102, '中国电信')
