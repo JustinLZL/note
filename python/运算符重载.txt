@@ -1,0 +1,78 @@
+运算符重载:
+    让自定义的类生成的对象(实例)能够实例运算符进行操作
+    作用:
+        让自定义类的实例像内建对象一样运行运算符操作
+        让程序简洁易读
+        对自定义的对象将运算符赋予新的运算规则
+    说明:
+        运算符重载方法的参数已经有固定的含义,不建议改变原有的意义
+
+算术运算重载
+    __add__(self, rhs)        self + rhs      加法
+    __sub__(self, rhs)        self - rhs      减法
+    __mul__(self, rhs)        self * rhs      乘法
+    __truediv__(self, rhs)    self / rhs      除法
+    __floordiv__(self, rhs)   self // rhs     地板除
+    __mod__(self, rhs)        self % rhs      求余(取模)
+    __pow__(self, rhs)        self ** rhs     幂运算
+
+    *rhs(right hand side) 右手边
+
+二元运算符的重载方法格式
+    def __xxx__(self, other):
+        运算规则的语句
+
+反向算术运算符的重载
+    __radd__(self, lhs)       lhs + self      加法
+    __rsub__(self, lhs)       lhs - self      减法
+    __rmul__(self, lhs)       lhs * self      乘法
+    __rtruediv__(self, lhs)   lhs / self      除法
+    __rfloordiv__(self, lhs)  lhs // self     地板除
+    __rmod__(self, lhs)       lhs % self      求余(取模)
+    __rpow__(self, lhs)       lhs ** self     幂运算
+
+复合赋值算术运算符重载
+    以复合赋值算术运算符 x += y 为例,此运算符会优先调用x.__iadd__(y)方法,如果没有__iadd__方法时将复合赋值运算符
+    拆分为x = x + y, 然后调用x = x.__add__(y)方法,如果不存在__add__方法则触发typeerror异常
+    __iadd__(self, rhs)          self += rhs      加法
+    __isub__(self, rhs)          self -= rhs      减法
+    __imul__(self, rhs)          self *= rhs      乘法
+    __itruediv__(self, rhs)      self /= rhs      除法
+    __ifloordiv__(self, rhs)     self //= rhs     地板除
+    __imod__(self, rhs)          self %= rhs      求余(取模)
+    __ipow__(self, rhs)          self **= rhs     幂运算
+
+比较运算符的重载
+    __lt__(self, rhs)      self < rhs      小于
+    __le__(self, rhs)      self <= rhs     小于等于
+    __gt__(self, rhs)      self > rhs      大于
+    __ge__(self, rhs)      self >= rhs     大于等于
+    __eq__(self, rhs)      self == rhs     等于
+    __ne__(self, rhs)      self != rhs     不等于
+
+位运算符的重载
+    __invert__(self, rhs)      ~self            取反(一元运算符)
+    __and__(self, rhs)          self & rhs      位与
+    __or__(self, rhs)           self | rhs      位或
+    __xor__(self, rhs)          self ^ rhs      位异或
+    __lshift__(self, rhs)      self << rhs      左移
+    __rshift__(self, rhs)      self >> rhs      右移
+
+反向位运算符的重载
+    __rand__(self, lhs)          lhs & self      位与
+    __ror__(self, lhs)           lhs | self      位或
+    __rxor__(self, lhs)          lhs ^ self      位异或
+    __rlshift__(self, lhs)      lhs << self      左移
+    __rrshift__(self, lhs)      lhs >> self      右移
+
+复合赋值位运算符的重载
+    __iand__(self, rhs)          self &= rhs      位与
+    __ior__(self, rhs)           self |= rhs      位或
+    __ixor__(self, rhs)          self ^= rhs      位异或
+    __ilshift__(self, rhs)      self <<= rhs      左移
+    __irshift__(self, rhs)      self >>= rhs      右移
+
+一元运算符的重载
+    __neg__(self)         - self       负号
+    __pos__(self)         + self       正号
+    __invert__(self)      ~ self       取反
