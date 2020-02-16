@@ -119,9 +119,38 @@ del 语句总结
 预置的实例属性:
 	__dict__：绑定一个存储此实例自身变量的字典
 	__class__：绑定创建此实例的类(类实例)
-
+	
     作用:
 		可以借助于此属性来访问创建此实例的类
+
+__call__:使得一个类实例也可以成为类似函数这样能直接被调用的对象
+	__call__()方法还可以带参数，定义一个可以直接调用类实例的Reader类，并可统计读者数量
+
+	class Reader():
+　　　　count = 0
+　　　　def __init__(self,name,nationality):
+　　　　　　self.name = name
+　　　　　　self.nationality = nationality
+　　　　　　Reader.count += 1
+　　　　def __call__(self, behave):
+　　　　　　print('Reader: %s' % self.name)
+　　　　　　print('Nationality: %s' % self.nationality)
+　　　　　　print('%s is being %s.' % (self.name, behave))
+　　　　　　print('The total number of readers is %s.' % Reader.count)
+	  
+	>>>a = Reader('Annie','Chinese')
+	>>>a('Nice')
+	Reader: Annie
+	Nationality: Chinese
+	Annie is being Nice.
+	The total number of readers is 1.
+	>>>b = Reader('Adam','American')
+	>>>b('Silly')
+	Reader: Adam
+	Nationality: American
+	Adam is being Silly.
+	The total number of readers is 2.      #自动增加
+
 
 
 类变量
