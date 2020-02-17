@@ -68,6 +68,17 @@ yield 语句:
 	    print(x,end=' ')
     #0 1 2 3
 
+斐波那契数列
+def Fab(n):
+    index,a,b = 0,0,1
+    while index < n:
+        a,b=b,a+b
+        index +=1
+        yield a
+
+for i in Fab(10):
+    print(i)
+
 
 生成器表达式:
 	语法:(表达式 for 变量 in 可迭代对象 if 真值表达式)
