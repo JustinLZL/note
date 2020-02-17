@@ -16,6 +16,21 @@ def f1(sleep_time):
 
 f1()
 
+2.用类做装饰器
+class Test(object):
+    def __init__(self, func):
+        print('test init')
+        print('func name is %s ' % func.__name__)
+        self.__func = func
+    def __call__(self, *args, **kwargs):
+        print('装饰器中的功能')
+        self.__func()
+@Test
+def test():
+    print('this is test func')
+test()
+
+
 
 Python内置装饰器
 
@@ -27,3 +42,4 @@ Python内置装饰器
 
 
 
+参考链接：https://www.cnblogs.com/slysky/p/9777424.html
