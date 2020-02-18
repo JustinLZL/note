@@ -30,8 +30,8 @@ login_info = {
 }
 
 login_response = session.post(login_url,
-headers=headers,
-data=login_info)
+	headers=headers,
+	data=login_info)
 # 2.登录成功之后带着有效的cookies访问目标链接
 person_url = '' #会员页
 
