@@ -123,7 +123,7 @@ del 语句总结
     作用:
 		可以借助于此属性来访问创建此实例的类
 
-__call__:使得一个类实例也可以成为类似函数这样能直接被调用的对象
+__call__:使得一个类实例也可以成为类似函数这样能直接被调用的对象(使对象当函数一样去调用)
 	__call__()方法还可以带参数，定义一个可以直接调用类实例的Reader类，并可统计读者数量
 
 	class Reader():
@@ -150,6 +150,19 @@ __call__:使得一个类实例也可以成为类似函数这样能直接被调�
 	Nationality: American
 	Adam is being Silly.
 	The total number of readers is 2.      #自动增加
+	
+	class CallTest():
+	    def __call__(self,a,b):
+		print("This is call test")
+		print('a =',a,'b =',b)
+
+	test = CallTest()
+
+	test(1,2)
+
+	[out]:
+	This is call test
+	a = 1 b = 2
 
 
 
