@@ -137,30 +137,31 @@ TCP套接字
 from socket import *
 
 1.创建套接字
-语法:
-	socket.socket(socket_family = AF_INET,
-				  socket_type = SOCK_STREAM,
-				  proto = 0)
-	e.g.:s = socket(AF_INET,SOCK_STREAM)
-功能:创建一个套接字
-参数:
-	socket_family:选择地址族类型 AF_INET 表示IPv4
-	socket_type:选择套接字类型 SOCK_STREAM 流式
-	 						  SOCK_DGRAM 数据报
-	proto:选择子协议,通常为0
-返回值:返回一个套接字对象
+	语法:
+		socket.socket(socket_family = AF_INET,
+					  socket_type = SOCK_STREAM,
+					  proto = 0)
+		e.g.:s = socket(AF_INET,SOCK_STREAM)
+	功能:创建一个套接字
+	参数:
+		socket_family:选择地址族类型
+			1.AF_INET 表示IPv4
+		socket_type:选择套接字类型
+			1.SOCK_STREAM 流式
+			2.SOCK_DGRAM 数据报
+		proto:选择子协议,通常为0
+	返回值:返回一个套接字对象
 
 2.绑定IP端口
-	s.bind()
-e.g.: s.bind(('192.168.1.2',8888))
-功能:绑定IP和端口
-参数:二元元组,第一项为IP 第二项为端口号
-		e.g.('192.168.1.2',8888)
+		s.bind()
+	e.g.: s.bind(('192.168.1.2',8888))
+	功能:绑定IP和端口
+	参数:二元元组,第一项为IP 第二项为端口号
 
 3.将套接字设置为可监听
 	s.listen(n)
-功能:将套接字设置为监听套接字,并设置监听队列
-参数:设置队列中监听对象的数量 n为大于0的正整数
+	功能:将套接字设置为监听套接字,并设置监听队列
+	参数:设置队列中监听对象的数量 n为大于0的正整数
 
 4.等待客户端的连接
 	connfd,addr = s.accept()
