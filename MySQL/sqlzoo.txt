@@ -1,0 +1,7 @@
+https://sqlzoo.net/wiki/SELECT_names/zh
+
+13.找出所有首都和其國家名字,而首都要有國家名字中出現。
+  SELECT capital, name FROM world WHERE capital LIKE concat('%',name,'%');
+
+
+
