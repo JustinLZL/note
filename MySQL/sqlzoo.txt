@@ -2,8 +2,39 @@ https://sqlzoo.net/wiki/SELECT_names/zh
 
 13.找出所有首都和其國家名字,而首都要有國家名字中出現。
 	SELECT capital, name FROM world WHERE capital LIKE concat('%',name,'%');
-	
-	concat:将多个字符串连接成一个字符串，如果有任何一个参数为null，则返回值为null。
-	
+
+15.顯示國家名字，及其延伸詞，如首都是國家名字的延伸。
+	select name, mid(capital, length(name)+1)
+	from world
+	where capital like concat(name, '%')
+	and name != capital;
+
+	select name, replace(capital, name, '')
+	from world
+	where capital like concat(name, '%')
+	and name != capital;
+
+
+10.Show the name and per-capita GDP for those countries with a GDP of at least one trillion (1000000000000; that is 12 zeros). Round this value to the nearest 1000.
+
+Show per-capita GDP for the trillion dollar countries to the nearest $1000.
+	select name, round(GDP/population,-3)
+	from world
+	where GDP > 1000000000000;
+
+12.The capital of Sweden is Stockholm. Both words start with the letter 'S'.
+
+Show the name and the capital where the first letters of each match. Don't include countries where the name and the capital are the same word.
+You can use the function LEFT to isolate the first character.
+You can use <> as the NOT EQUALS operator.
+
+	SELECT name, capital
+	FROM world
+	where LEFT(name,1) = LEFT(capital,1)
+	and name <> capital;
+
+
+
+
 
 
