@@ -1,6 +1,17 @@
-一、concat()函数
-	1.功能：将多个字符串连接成一个字符串并返回。如果有任何一个参数为null，则返回值为null。
-	2.语法：concat(str1, str2,...)
+concat(str1, str2,...)
+	功能：将多个字符串连接成一个字符串并返回。如果有任何一个参数为null，则返回值为null。
+
+MID(ColumnName, Start [, Length])
+	功能：字符串从1开始，而非0，Length是可选项，如果没有提供，MID()函数将返回余下的字符串。
+
+REPLACE(f, s1, s2)
+	功能：returns the string f with all occurances of s1 replaced with s2.
+	 REPLACE('vessel','e','a') -> 'vassal'
+
+
+
+
+
 
 
 
