@@ -23,7 +23,6 @@ Show per-capita GDP for the trillion dollar countries to the nearest $1000.
 	where GDP > 1000000000000;
 
 12.The capital of Sweden is Stockholm. Both words start with the letter 'S'.
-
 Show the name and the capital where the first letters of each match. Don't include countries where the name and the capital are the same word.
 You can use the function LEFT to isolate the first character.
 You can use <> as the NOT EQUALS operator.
@@ -33,10 +32,18 @@ You can use <> as the NOT EQUALS operator.
 	where LEFT(name,1) = LEFT(capital,1)
 	and name <> capital;
 
+13.List the winners, year and subject where the winner starts with Sir. Show the the most recent first, then by name order.
+	select winner, yr, subject 
+	from nobel
+	where winner like "Sir%"
+	order by yr desc ,winner asc;
 
-
-
-
+14.Show the 1984 winners and subject ordered by subject and winner name; but list Chemistry and Physics last.
+tips:The expression subject IN ('Chemistry','Physics') can be used as a value - it will be 0 or 1.
+	SELECT winner, subject
+	  FROM nobel
+	 WHERE yr=1984
+	 ORDER BY subject IN ('Chemistry','Physics'), subject,winner
 
 
 
