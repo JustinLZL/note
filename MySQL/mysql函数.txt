@@ -8,7 +8,53 @@ REPLACE(f, s1, s2)
 	功能：returns the string f with all occurances of s1 replaced with s2.
 	 REPLACE('vessel','e','a') -> 'vassal'
 
+https://www.cnblogs.com/HDK2016/p/8578587.html
+子查询就是指在一个select语句中嵌套另一个select语句。
+any，in，some，all分别是子查询关键词之一，
 
+any 可以与=、>、>=、<、<=、<>结合起来使用，分别表示等于、大于、大于等于、小于、小于等于、不等于其中的任何一个数据。
+
+all可以与=、>、>=、<、<=、<>结合是来使用，分别表示等于、大于、大于等于、小于、小于等于、不等于其中的其中的所有数据。
+
+他们进行子查询的语法如下：
+
+operand comparison_operator any (subquery);
+operand in (subquery);
+operand coparison_operator some (subquery);
+operand comparison_operator all (subquery);
+
+any,all关键字必须与一个比较操作符一起使用。any关键词可以理解为“对于子查询返回的列中的任一数值，如果比较结果为true，则返回true”。
+例如：
+
+select s1 from t1 where s1 > any (select s1 from t2);
+
+假设表t1中有一行包含(10)，t2包含(21,14,6),则表达式为true；如果t2包含（20,10），或者表t2为空表，则表达式为false。如果表t2包含（null，null，null），则表达式为unkonwn。
+
+all的意思是“对于子查询返回的列中的所有值，如果比较结果为true，则返回true”
+例如：
+
+select s1 from t1 where s1 > all(select s1 from t2);
+
+假设表t1中有一行包含（10）。如果表t2包含（-5,0，+5），则表达式为true，因为10比t2中的查出的所有三个值大。如果表t2包含（12,6，null，-100），则表达式为false，因为t2中有一个值12大于10。如果表t2包含（0，null，1），则表达式为unknown。如果t2为空表，则结果为true。
+
+not in 是 “<>all”的别名，用法相同。
+
+语句in 与“=any”是相同的。
+
+例如：
+
+select s1 from t1 where s1 = any (select s1 from t2);
+select s1 from t1 where s1 in (select s1 from t2);
+
+语句some是any的别名，用法相同。
+例如：
+
+select s1 from t1 where s1 <> any (select s1 from t2);
+select s1 from t1 where s1 <> some (select s1 from t2);
+
+在上述查询中some理解上就容易了“表t1中有部分s1与t2表中的s1不相等”，这种语句用any理解就有错了。
+
+ 
 
 
 
