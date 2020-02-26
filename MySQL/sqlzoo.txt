@@ -68,6 +68,12 @@ Show the name and the population of each country in Europe. Show the population 
 	where a.population/3 >= all(select population from world b
 		where a.continent = b.continent 
 		and a.name != b.name 
-		and b.population >0)
+		and b.population >0);
+
+8.List the continents that have a total population of at least 100 million.
+	select continent from (select continent,sum(population) as total from world group by continent)
+	where total >= 100000000;
+
+
 
 
