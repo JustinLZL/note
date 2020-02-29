@@ -1,0 +1,20 @@
+MongoDB安装
+
+1.自动安装
+sudo apt-get install mongodb
+
+默认安装位置:	/var/lib/mongodb
+配置文件:/etc/mongodb.conf
+命令集:/usr/bin  或  /usr/local/bin
+(软件安装后提供功能性的命令)
+
+2.手动安装
+	1.www.mongodb.com-->get mongodb-->community server
+		选择想要下载的版本
+	2.选择合适的位置解压(/usr/local 或 /opt)
+		tar 解压得到MongoDB文件夹
+	3.将命令集(解压后文件夹中bin目录)添加到环境变量
+		PATH=$PATH:/opt/mongo/bin
+		export PATH
+		将以上两句添加入 /etc/rc.local
+	4.重启系统
