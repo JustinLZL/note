@@ -27,4 +27,30 @@ db:mongodb系统全局变量,代表当前正在使用的数据库
 e.g.:mongodump -h 127.0.0.1 -d stu -o student
 将stu数据库备份到student目录中
 恢复:mongorestore -h dbhost:port -d dbname path
-						主机			数据库 目录
+					主机			数据库 目录
+
+
+数据库的监测
+mongostat
+
+insert query update delete:每秒执行增删改查的次数
+
+command:每秒运行命令的次数
+
+flushes:每秒清缓存的次数(即每秒与磁盘交互的次数)
+
+vsize:使用的虚拟内存
+
+res:物理内存
+
+
+监测每个数据库的读写时长
+mongotop
+
+ns 			total		read		write
+数据集合		总时长		读时长		写时长
+
+删除数据库
+db.dropDatabase()
+删除db代表的数据库
+
