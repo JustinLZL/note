@@ -103,3 +103,12 @@ Show the name and the population of each country in Europe. Show the population 
 	group by a.name
 	having count(a.name) >= 15
 	order by a.name ) b;
+
+15.List all the people who have worked with 'Art Garfunkel'.
+	select a.name from actor a
+	join casting c
+	on a.id = c.actorid
+	join movie m
+	on m.id = c.movieid
+	where c.movieid in (select movieid from casting where actorid = (select id from actor where name = 'Art Garfunkel'))
+	and name != 'Art Garfunkel';
