@@ -55,7 +55,8 @@ select s1 from t1 where s1 <> some (select s1 from t2);
 在上述查询中some理解上就容易了“表t1中有部分s1与t2表中的s1不相等”，这种语句用any理解就有错了。
 
  
-
+COALESCE(expression_1, expression_2, ...,expression_n)
+	依次参考各参数表达式，遇到非null值即停止并返回该值。如果所有的表达式都是空值，最终将返回一个空值。使用COALESCE在于大部分包含空值的表达式最终将返回空值。
 
 
 
